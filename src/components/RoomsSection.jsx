@@ -29,9 +29,10 @@ const rooms = [
 const RoomsSection = () => {
   const navigate = useNavigate();
 
-  const handleBookNowClick = () => {
-    navigate('/register'); 
+  const handleBookNowClick = (roomId) => {
+    navigate(`/room/${roomId}`); 
   };
+  
 
   return (
     <section className="rooms-section">
@@ -48,9 +49,10 @@ const RoomsSection = () => {
                   <li key={index}>{feature}</li>
                 ))}
               </ul>
-              <button className="btn-book-room" onClick={handleBookNowClick}>
+              <button className="btn-book-room" onClick={() => handleBookNowClick(room.id)}>
                 Book Now
               </button>
+
             </div>
           </div>
         ))}

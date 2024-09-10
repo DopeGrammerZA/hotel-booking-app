@@ -1,6 +1,6 @@
 .rooms-section {
-    padding: 4rem 2rem;
-    background-color: #f4f4f4;
+    padding: 3rem 2rem;
+    background-color: #f9f9f9;
     text-align: center;
   }
   
@@ -79,7 +79,7 @@
     background-color: gold;
   }
   
-  /* Responsive Styles */
+
   @media (max-width: 768px) {
     .rooms-container {
       flex-direction: column;

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import './Register.css';
-
-const auth = getAuth();
+import { auth } from '../firebase-config';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import '../../components/Register.css';
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -47,7 +46,7 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/home');
+      navigate('/dashboard');
     } catch (error) {
       setError('Failed to login. Please check your email and password.');
       console.error('Error signing in:', error.message);
@@ -81,6 +80,13 @@ const LoginForm = () => {
         />
       </div>
       <button type="submit" className="btn-submit">Login</button>
+      <button
+        type="button"
+        className="btn-reset-password"
+        onClick={() => navigate('/forgot-password')} 
+      >
+        Forgot Password?
+      </button>
     </form>
   );
 };
@@ -101,7 +107,7 @@ const RegisterForm = () => {
     }
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate('/home'); 
+      navigate('/dashboard');
     } catch (error) {
       setError('Failed to register. Please try again.');
       console.error('Error registering:', error.message);
