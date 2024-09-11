@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RoomsSection.css';
+import img from '../assets/about-pic.jpg'
 
 const rooms = [
   {
@@ -39,7 +40,7 @@ const RoomsSection = () => {
       <h2>Our Rooms</h2>
       <div className="rooms-container">
         {rooms.map(room => (
-          <div key={room.id} className="room-card">
+          <div key={img} className="room-card">
             <img src={room.image} alt={room.name} className="room-image" />
             <div className="room-details">
               <h3>{room.name}</h3>

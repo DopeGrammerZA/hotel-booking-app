@@ -9,7 +9,8 @@ const rooms = [
     price: "R 299/night",
     features: ["King-sized Bed", "Ocean View", "Private Balcony", "Luxury Bath"],
     image: "/assets/bg-pic.jpg",
-    description: "Enjoy the luxury of our Deluxe Suite with stunning ocean views and all the amenities you need for a perfect stay."
+    description: "Enjoy the luxury of our Deluxe Suite with stunning ocean views and all the amenities you need for a perfect stay.",
+    policies: ["Check-in: 3 PM", "Check-out: 11 AM", "No Smoking", "Pets Allowed"]
   },
   {
     id: 2,
@@ -17,7 +18,8 @@ const rooms = [
     price: "R 199/night",
     features: ["Queen-sized Bed", "City View", "Work Desk", "Mini Bar"],
     image: "/assets/bg-pic.jpg",
-    description: "The Executive Room offers a comfortable and elegant space ideal for business travelers, featuring a work desk and mini bar."
+    description: "The Executive Room offers a comfortable and elegant space ideal for business travelers, featuring a work desk and mini bar.",
+    policies: ["Check-in: 3 PM", "Check-out: 11 AM", "No Smoking"]
   },
   {
     id: 3,
@@ -25,7 +27,8 @@ const rooms = [
     price: "R 129/night",
     features: ["Double Bed", "Garden View", "Free Wi-Fi", "Coffee Maker"],
     image: "/assets/bg-pic.jpg",
-    description: "Our Standard Room provides a cozy and affordable option with a lovely garden view and essential amenities."
+    description: "Our Standard Room provides a cozy and affordable option with a lovely garden view and essential amenities.",
+    policies: ["Check-in: 3 PM", "Check-out: 11 AM", "No Smoking"]
   }
 ];
 
@@ -50,8 +53,16 @@ const RoomDetails = () => {
             <li key={index}>{feature}</li>
           ))}
         </ul>
-        <button className="login-button" onClick={() => navigate('/register')}>
-          Book now
+        <div className="room-details-policies">
+          <h2>Policies</h2>
+          <ul>
+            {room.policies.map((policy, index) => (
+              <li key={index}>{policy}</li>
+            ))}
+          </ul>
+        </div>
+        <button className="btn-book-room" onClick={() => navigate('/login')}>
+          Book Now
         </button>
       </div>
     </section>

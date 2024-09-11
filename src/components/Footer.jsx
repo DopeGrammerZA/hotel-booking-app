@@ -16,9 +16,9 @@ const Footer = () => {
         </div>
         <div className="footer-section contact-info">
           <h3>Contact Us</h3>
-          <p><strong>Address:</strong> 123 Hotel Street, City, Country</p>
-          <p><strong>Phone:</strong> +123 456 7890</p>
-          <p><strong>Email:</strong> info@yourhotel.com</p>
+          <p><strong>Address:</strong> 1937 Pretoria, South Africa</p>
+          <p><strong>Phone:</strong> 10111 </p>
+          <p><strong>Email:</strong> info@Peaceful.co.za</p>
         </div>
         <div className="footer-section social-media">
           <h3>Follow Us</h3>

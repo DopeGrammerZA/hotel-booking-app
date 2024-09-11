@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../firebase-config';
+import { auth, db } from '../firebase-config'; 
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { collection, doc, setDoc } from 'firebase/firestore';
 import '../../components/Register.css';
 
 const AuthPage = () => {
@@ -46,7 +47,7 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/dashboard');
+      navigate('/');
     } catch (error) {
       setError('Failed to login. Please check your email and password.');
       console.error('Error signing in:', error.message);
@@ -54,7 +55,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form className="login-form" onSubmit={handleSubmit}>
+    <form className="auth-form" onSubmit={handleSubmit}>
       <h2>Login</h2>
       {error && <p className="error-message">{error}</p>}
       <div className="form-group">
@@ -106,7 +107,18 @@ const RegisterForm = () => {
       return;
     }
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      // Create user with email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Add user data to Firestore
+      await setDoc(doc(collection(db, 'users'), user.uid), {
+        name: name,
+        email: email,
+        // Add other fields as needed
+      });
+
+      // Redirect to dashboard or another page
       navigate('/dashboard');
     } catch (error) {
       setError('Failed to register. Please try again.');
@@ -115,7 +127,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <form className="register-form" onSubmit={handleSubmit}>
+    <form className="auth-form" onSubmit={handleSubmit}>
       <h2>Register</h2>
       {error && <p className="error-message">{error}</p>}
       <div className="form-group">
