@@ -8,8 +8,9 @@ import AuthPage from './firebase/auth/AuthPage';
 import Dashboard from './components/Dashboard';
 import ForgotPasswordPage from './components/ForgotPassword';
 import ReviewPage from './components/ReviewsSection';
-import EditProfile from './components/EditProfile'
-
+import EditProfile from './components/EditProfile';
+import AdminDashboard from './components/AdminDashboard'; //
+import AccommodationList from './components/AccommodationList';
 
 
 
@@ -29,6 +30,8 @@ function App() {
             </>
           } />
           <Route path="/login" element={<AuthPage />} />
+          <Route path="/adminDashboard" element={<AdminDashboard />} />
+          <Route path="/accomodationList" element={<AccommodationList />} />
           <Route path="/dashboard" element={< Dashboard/>} />
           <Route path="/room/:id" element={<RoomDetails />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />

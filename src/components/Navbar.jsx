@@ -1,9 +1,9 @@
-// Navbar.js
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { auth } from '../firebase/firebase-config';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'; 
+import { FaUserCircle } from "react-icons/fa";
 
 
 const Navbar = () => {
@@ -38,11 +38,7 @@ const Navbar = () => {
           <Link to='/login' className="btn-book-now">Login</Link>
         ) : (
           <div className="user-menu">
-            <img
-              src={faUserCircle} 
-              alt="User Icon"
-              className="user-icon"
-            />
+            <FaUserCircle />
             <div className="user-options">
               <Link to="/edit-profile" className="user-option">Edit Profile</Link>
               <button onClick={handleLogout} className="user-option">Logout</button>

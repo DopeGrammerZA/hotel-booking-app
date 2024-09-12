@@ -1,5 +1,3 @@
-/* Navbar.css */
-
 .navbar {
   position: fixed;
   top: 0;
@@ -43,7 +41,7 @@
 .navbar-buttons .btn-book-now {
   padding: 10px 20px;
   color: #fff;
-  background-color: #e94e77;
+  background-color: gold;
   border: none;
   border-radius: 5px;
   text-decoration: none;
@@ -51,7 +49,7 @@
 }
 
 .navbar-buttons .btn-book-now:hover {
-  background-color: #d43f5d;
+  background-color: rgb(110, 97, 20);
 }
 
 .user-menu {
@@ -70,8 +68,8 @@
 .user-options {
   display: none;
   position: absolute;
-  top: 30px; 
-  right: 0;
+  top: 15px; 
+  right: -16px;
   background-color: #333;
   border-radius: 5px;
   padding: 10px;

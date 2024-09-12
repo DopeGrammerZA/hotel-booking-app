@@ -1,115 +1,114 @@
 .auth-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    min-width: 100vw;
-    background-color: #f4f4f4;
-    padding: 1.5rem;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: #f4f4f4;
+  padding: 1.5rem;
+}
+
+.auth-container {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.auth-tabs {
+  display: flex;
+  margin-bottom: 1.5rem;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 1rem;
+  font-size: 1.125rem;
+  border: none;
+  background: #f9f9f9;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.auth-tab.active {
+  background: gold;
+  color: #fff;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.btn-submit {
+  background-color: gold;
+  color: #fff;
+  border: none;
+  padding: 0.75rem;
+  font-size: 1.125rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.btn-submit:hover {
+  background-color: rgb(185, 166, 58);
+}
+
+.form-link {
+  font-size: 0.875rem;
+  margin-top: 1rem;
+}
+
+.form-link button {
+  background: none;
+  border: none;
+  color: gold;
+  cursor: pointer;
+  font-size: 0.875rem;
+  text-decoration: underline;
+}
+
+.form-link button:hover {
+  color: rgb(185, 166, 58);
+}
+
+@media (max-width: 768px) {
   .auth-container {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-    padding: 2rem;
-    box-sizing: border-box;
-  }
-  
-  .auth-tabs {
-    display: flex;
-    margin-bottom: 1.5rem;
-  }
-  
-  .auth-tab {
-    flex: 1;
     padding: 1rem;
-    font-size: 1.125rem;
-    border: none;
-    background: #f9f9f9;
-    cursor: pointer;
-    border-radius: 8px 8px 0 0;
-    transition: background-color 0.3s, color 0.3s;
   }
-  
-  .auth-tab.active {
-    background: gold;
-    color: #fff;
-  }
-  
-  .auth-form {
-    display: flex;
+
+  .auth-tabs {
     flex-direction: column;
   }
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  .form-group label {
-    display: block;
-    font-size: 1rem;
+
+  .auth-tab {
+    border-radius: 8px;
     margin-bottom: 0.5rem;
   }
-  
-  .form-group input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .btn-submit {
-    background-color: gold;
-    color: #fff;
-    border: none;
-    padding: 0.75rem;
-    font-size: 1.125rem;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-    width: 108%;
-  }
-  
-  .btn-submit:hover {
-    background-color: gold;
-  }
-  
-  .form-link {
-    font-size: 0.875rem;
-    margin-top: 1rem;
-  }
-  
-  .form-link button {
-    background: none;
-    border: none;
-    color: gold;
-    cursor: pointer;
-    font-size: 0.875rem;
-    text-decoration: underline;
-  }
-  
-  .form-link button:hover {
-    color: rgb(185, 166, 58);
-  }
-  
-
-  @media (max-width: 768px) {
-    .auth-container {
-      padding: 1rem;
-    }
-  
-    .auth-tabs {
-      flex-direction: column;
-    }
-  
-    .auth-tab {
-      border-radius: 8px;
-      margin-bottom: 0.5rem;
-    }
-  }
+}
 
 .btn-reset-password {
   margin-top: 1rem;
