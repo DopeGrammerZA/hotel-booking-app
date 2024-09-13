@@ -1,7 +1,7 @@
-// src/AdminDashboard.jsx
+// src/components/AdminDashboard.jsx
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addAccommodation, fetchAccommodations } from '../firebase/auth/accommodationSlice';
+import { addAccommodation, fetchAccommodations, selectAccommodations } from '../firebase/auth/accommodationSlice';
 
 const AdminDashboard = () => {
   const [newAccommodation, setNewAccommodation] = useState({
@@ -11,9 +11,9 @@ const AdminDashboard = () => {
   });
 
   const dispatch = useDispatch();
-  const accommodations = useSelector((state) => state.accommodations.data);
-  const loading = useSelector((state) => state.accommodations.loading);
-  const error = useSelector((state) => state.accommodations.error);
+  const accommodations = useSelector(selectAccommodations) || []; // Default to an empty array if undefined
+  const loading = useSelector((state) => state.accommodations?.loading || false); // Handle undefined states
+  const error = useSelector((state) => state.accommodations?.error || null); // Handle undefined states
 
   useEffect(() => {
     dispatch(fetchAccommodations());

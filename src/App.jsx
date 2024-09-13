@@ -31,7 +31,7 @@ function App() {
           } />
           <Route path="/login" element={<AuthPage />} />
           <Route path="/adminDashboard" element={<AdminDashboard />} />
-          <Route path="/accomodationList" element={<AccommodationList />} />
+          <Route path="/login/accommodationList" element={<AccommodationList />} />
           <Route path="/dashboard" element={< Dashboard/>} />
           <Route path="/room/:id" element={<RoomDetails />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
