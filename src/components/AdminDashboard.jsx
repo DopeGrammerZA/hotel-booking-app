@@ -1,66 +1,19 @@
-// src/components/AdminDashboard.jsx
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addAccommodation, fetchAccommodations, selectAccommodations } from '../firebase/auth/accommodationSlice';
+import { useSelector } from 'react-redux';
+import AccommodationList from './AccommodationList';
+import { Link } from 'react-router-dom';
 
 const AdminDashboard = () => {
-  const [newAccommodation, setNewAccommodation] = useState({
-    id: '',
-    name: '',
-    description: '',
-  });
+  const { role } = useSelector((state) => state.user);
 
-  const dispatch = useDispatch();
-  const accommodations = useSelector(selectAccommodations) || []; // Default to an empty array if undefined
-  const loading = useSelector((state) => state.accommodations?.loading || false); // Handle undefined states
-  const error = useSelector((state) => state.accommodations?.error || null); // Handle undefined states
-
-  useEffect(() => {
-    dispatch(fetchAccommodations());
-  }, [dispatch]);
-
-  const handleAddAccommodation = () => {
-    dispatch(addAccommodation(newAccommodation));
-  };
+  if (role !== 'admin') {
+    return <div>Access Denied</div>;
+  }
 
   return (
     <div>
       <h1>Admin Dashboard</h1>
-      <div>
-        <h2>Add Accommodation</h2>
-        <input
-          type="text"
-          placeholder="ID"
-          value={newAccommodation.id}
-          onChange={(e) => setNewAccommodation({ ...newAccommodation, id: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Name"
-          value={newAccommodation.name}
-          onChange={(e) => setNewAccommodation({ ...newAccommodation, name: e.target.value })}
-        />
-        <textarea
-          placeholder="Description"
-          value={newAccommodation.description}
-          onChange={(e) => setNewAccommodation({ ...newAccommodation, description: e.target.value })}
-        />
-        <button onClick={handleAddAccommodation} disabled={loading}>
-          {loading ? 'Adding...' : 'Add Accommodation'}
-        </button>
-        {error && <p className="error-message">{error}</p>}
-      </div>
-      <div>
-        <h2>Accommodation List</h2>
-        <ul>
-          {accommodations.map((accommodation) => (
-            <li key={accommodation.id}>
-              <h3>{accommodation.name}</h3>
-              <p>{accommodation.description}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Link to="/add-accommodation">Add Accommodation</Link>
+      <AccommodationList />
     </div>
   );
 };

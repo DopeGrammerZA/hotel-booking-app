@@ -1,25 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
-import { auth } from '../firebase/firebase-config';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons'; 
 import { FaUserCircle } from "react-icons/fa";
-
+import { useDispatch, useSelector } from 'react-redux';
+import { listenToAuthChanges, signOutUser } from '../firebase/auth/authSlice'; 
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user); 
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(setUser);
-    return () => unsubscribe();
-  }, []);
+    dispatch(listenToAuthChanges()); 
+  }, [dispatch]);
 
-  const handleLogout = async () => {
-    try {
-      await auth.signOut();
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
+  const handleLogout = () => {
+    dispatch(signOutUser()); 
   };
 
   return (
@@ -28,7 +23,7 @@ const Navbar = () => {
         <h1>Peaceful Hotel</h1>
       </div>
       <ul className="navbar-menu">
-      <li><Link to='/'>Home</Link></li>
+        <li><Link to='/'>Home</Link></li>
         <li><Link to='/'>About</Link></li>
         <li><Link to='/'>Rooms</Link></li>
         <li><Link to='/'>Contact</Link></li>

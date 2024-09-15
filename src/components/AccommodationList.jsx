@@ -1,21 +1,27 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectAccommodations } from '../firebase/auth/accommodationSlice'; 
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchAccommodations, selectAccommodations } from '../firebase/auth/accommodationSlice'; 
 
 const AccommodationList = () => {
+  const dispatch = useDispatch();
   const accommodations = useSelector(selectAccommodations);
+
+  useEffect(() => {
+    console.log(dispatch(fetchAccommodations())); 
+  }, [dispatch]);
+
+  if (!accommodations.length) {
+    return <p>Loading accommodations...</p>; 
+  }
 
   return (
     <div>
-      <h2>Accommodations</h2>
-      <ul>
-        {accommodations.map(accommodation => (
-          <li key={accommodation.id}>
-            <h3>{accommodation.name}</h3>
-            <p>{accommodation.description}</p>
-          </li>
-        ))}
-      </ul>
+      {accommodations.map((accommodation) => (
+        <div key={accommodation.id}>
+          <h3>{accommodation.name}</h3>
+          
+        </div>
+      ))}
     </div>
   );
 };
