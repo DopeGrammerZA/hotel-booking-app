@@ -1,53 +1,90 @@
-  import { useState } from 'react';
-  import { useNavigate } from 'react-router-dom';
-  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-  import '../../components/Register.css';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../auth/authSlice';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase-config'; 
+import '../../components/Register.css';
 
-  const auth = getAuth();
+const auth = getAuth();
 
-  const AuthPage = () => {
-    const [isLogin, setIsLogin] = useState(true);
+const AuthPage = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const dispatch = useDispatch(); 
+  const navigate = useNavigate();
 
-    const handleTabChange = (type) => {
-      setIsLogin(type === 'login');
-    };
-
-    return (
-      <div className="auth-page">
-        <div className="auth-container">
-          <div className="auth-tabs">
-            <button
-              className={`auth-tab ${isLogin ? 'active' : ''}`}
-              onClick={() => handleTabChange('login')}
-            >
-              Login
-            </button>
-            <button
-              className={`auth-tab ${!isLogin ? 'active' : ''}`}
-              onClick={() => handleTabChange('register')}
-            >
-              Register
-            </button>
-          </div>
-          <div className="auth-form">
-            {isLogin ? <LoginForm /> : <RegisterForm />}
-          </div>
-        </div>
-      </div>
-    );
+  const handleTabChange = (type) => {
+    setIsLogin(type === 'login');
   };
 
-  const LoginForm = () => {
+  return (
+    <div className="auth-page">
+      <div className="auth-container">
+        <div className="auth-tabs">
+          <button
+            className={`auth-tab ${isLogin ? 'active' : ''}`}
+            onClick={() => handleTabChange('login')}
+          >
+            Login
+          </button>
+          <button
+            className={`auth-tab ${!isLogin ? 'active' : ''}`}
+            onClick={() => handleTabChange('register')}
+          >
+            Register
+          </button>
+        </div>
+        <div className="auth-form">
+          {isLogin ? <LoginForm /> : <RegisterForm />}
+        </div>
+      </div>
+    </div>
+  );
+
+  function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  function validatePassword(password) {
+    
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    return passwordRegex.test(password);
+  }
+
+  function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
       e.preventDefault();
+
+      
+      if (!validateEmail(email)) {
+        setError('Please enter a valid email address.');
+        return;
+      }
+      if (!validatePassword(password)) {
+        setError('Password must be at least 8 characters long, contain at least 1 number, 1 uppercase and 1 lowercase letter.');
+        return;
+      }
+
       try {
-        await signInWithEmailAndPassword(auth, email, password);
-        navigate('/AccommodationList');
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
+        const userData = userDoc.data();
+
+        dispatch(setUser({ uid: user.uid, email: user.email, role: user?.role || 'user' }));
+
+        if (userData?.role === 'admin' && user.email === 'AdminOnly@gmail.com') {
+          navigate('/adminDashboard');
+        } else {
+          navigate('/Dashboard');
+        }
       } catch (error) {
         setError('Failed to login. Please check your email and password.');
         console.error('Error signing in:', error.message);
@@ -57,7 +94,6 @@
     return (
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Login</h2>
-        {error && <p className="error-message">{error}</p>}
         <div className="form-group">
           <label htmlFor="login-email">Email</label>
           <input
@@ -81,27 +117,51 @@
           />
         </div>
         <button type="submit" className="btn-submit">Login</button>
+        {error && <p className="error-message">{error}</p>}
       </form>
     );
-  };
+  }
 
-  const RegisterForm = () => {
+  function RegisterForm() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      if (password !== confirmPassword) {
-        setError('Passwords do not match');
+
+      
+      if (!name) {
+        setError('Full name is required.');
         return;
       }
+      if (!validateEmail(email)) {
+        setError('Please enter a valid email address.');
+        return;
+      }
+      if (!validatePassword(password)) {
+        setError('Password must be at least 8 characters long, contain at least 1 number, 1 uppercase and 1 lowercase letter.');
+        return;
+      }
+      if (password !== confirmPassword) {
+        setError('Passwords do not match.');
+        return;
+      }
+
       try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        navigate('/Dashboard'); 
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        await setDoc(doc(db, 'users', user.uid), {
+          name,
+          email,
+          role: 'user',
+        });
+
+        dispatch(setUser({ uid: user.uid, email: user.email, role: 'user' }));
+        navigate('/Dashboard');
       } catch (error) {
         setError('Failed to register. Please try again.');
         console.error('Error registering:', error.message);
@@ -111,7 +171,7 @@
     return (
       <form className="register-form" onSubmit={handleSubmit}>
         <h2>Register</h2>
-        {error && <p className="error-message">{error}</p>}
+        
         <div className="form-group">
           <label htmlFor="register-name">Full Name</label>
           <input
@@ -157,8 +217,10 @@
           />
         </div>
         <button type="submit" className="btn-submit">Register</button>
+        {error && <p className="error-message">{error}</p>}
       </form>
     );
-  };
+  }
+};
 
-  export default AuthPage;
+export default AuthPage;

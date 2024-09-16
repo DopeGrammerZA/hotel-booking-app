@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
-import { db, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from '../firebase-config';
+import { db } from '../firebase-config';
+import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
 
 const initialState = {
   accommodations: [],
   status: 'idle',
   error: null,
 };
-
 
 export const fetchAccommodations = createAsyncThunk(
   'accommodations/fetchAccommodations',
@@ -17,7 +17,6 @@ export const fetchAccommodations = createAsyncThunk(
   }
 );
 
-
 export const addAccommodation = createAsyncThunk(
   'accommodations/addAccommodation',
   async (newAccommodation) => {
@@ -25,7 +24,6 @@ export const addAccommodation = createAsyncThunk(
     return { id: docRef.id, ...newAccommodation };
   }
 );
-
 
 export const updateAccommodation = createAsyncThunk(
   'accommodations/updateAccommodation',
@@ -36,7 +34,6 @@ export const updateAccommodation = createAsyncThunk(
   }
 );
 
-
 export const deleteAccommodation = createAsyncThunk(
   'accommodations/deleteAccommodation',
   async (id) => {
@@ -46,6 +43,7 @@ export const deleteAccommodation = createAsyncThunk(
   }
 );
 
+// Slice
 const accommodationsSlice = createSlice({
   name: 'accommodations',
   initialState,
@@ -78,10 +76,10 @@ const accommodationsSlice = createSlice({
   },
 });
 
-export default accommodationsSlice.reducer;
-
-
+// Selector
 export const selectAccommodations = createSelector(
   (state) => state.accommodations.accommodations,
   (accommodations) => accommodations || []
 );
+
+export default accommodationsSlice.reducer;

@@ -9,9 +9,8 @@ import Dashboard from './components/Dashboard';
 import ForgotPasswordPage from './components/ForgotPassword';
 import ReviewPage from './components/ReviewsSection';
 import EditProfile from './components/EditProfile';
-import AddAccomodation from './components/AddAccomodation';
-
 import AccommodationList from './components/AccommodationList';
+import AdminDashboard from './components/AdminDashboard'
 
 
 
@@ -27,12 +26,11 @@ function App() {
               <RoomsSection />
               <ReviewPage />
               <Footer />
-              
             </>
           } />
           <Route path="/login" element={<AuthPage />} />
-              
           <Route path="/accommodationList" element={<AccommodationList />} />
+          <Route path="/AdminDashboard" element={<AdminDashboard />} />
           <Route path="/dashboard" element={< Dashboard/>} />
           <Route path="/room/:id" element={<RoomDetails />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />

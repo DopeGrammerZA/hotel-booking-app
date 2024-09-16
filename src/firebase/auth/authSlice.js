@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { auth } from '../firebase-config'; 
+import { auth } from '../firebase-config';
 
 const initialState = {
   user: null,
@@ -12,7 +12,8 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload;
+      const { uid, email, role } = action.payload;
+      state.user = { uid, email, role };
     },
     clearUser: (state) => {
       state.user = null;
@@ -20,20 +21,17 @@ const authSlice = createSlice({
   },
 });
 
-
 export const { setUser, clearUser } = authSlice.actions;
-
 
 export const listenToAuthChanges = () => (dispatch) => {
   auth.onAuthStateChanged((user) => {
     if (user) {
-      dispatch(setUser(user));
+      dispatch(setUser({ uid: user.uid, email: user.email, role: 'user' }));
     } else {
       dispatch(clearUser());
     }
   });
 };
-
 
 export const signOutUser = () => async (dispatch) => {
   try {
@@ -43,5 +41,8 @@ export const signOutUser = () => async (dispatch) => {
     console.error('Error signing out:', error);
   }
 };
+
+
+export const selectUser = (state) => state.auth.user;
 
 export default authSlice.reducer;
