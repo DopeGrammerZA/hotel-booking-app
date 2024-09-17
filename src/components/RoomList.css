@@ -1,0 +1,68 @@
+/* RoomList.css */
+
+/* Container for the list of rooms */
+.room-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between cards */
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  /* Style for individual room cards */
+  .room-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px; /* Fixed width for consistency */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Card hover effect */
+  .room-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Room name styling */
+  .room-card h3 {
+    font-size: 1.5rem;
+    margin: 16px;
+    color: #333;
+  }
+  
+  /* Room description styling */
+  .room-card p {
+    margin: 0 16px 16px;
+    color: #555;
+  }
+  
+  /* Price styling */
+  .room-card .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #e74c3c;
+    margin: 0 16px 16px;
+  }
+  
+  /* Button styling */
+  .room-card button {
+    background-color: #3498db;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 10px 20px;
+    margin: 0 16px 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Button hover effect */
+  .room-card button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+  }
+  

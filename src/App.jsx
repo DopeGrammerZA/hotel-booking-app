@@ -10,7 +10,8 @@ import ForgotPasswordPage from './components/ForgotPassword';
 import ReviewPage from './components/ReviewsSection';
 import EditProfile from './components/EditProfile';
 import AccommodationList from './components/AccommodationList';
-import AdminDashboard from './components/AdminDashboard'
+import AdminDashboard from './components/AdminDashboard';
+import RoomList from './components/RoomList'
 
 
 
@@ -34,7 +35,8 @@ function App() {
           <Route path="/dashboard" element={< Dashboard/>} />
           <Route path="/room/:id" element={<RoomDetails />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/edit-profile" element={<EditProfile />} />  
+          <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/roomlist" element={<RoomList />} />  
         </Routes>
       </div>
     </Router>

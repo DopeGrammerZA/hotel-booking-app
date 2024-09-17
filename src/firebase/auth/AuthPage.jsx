@@ -4,14 +4,14 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 import { useDispatch } from 'react-redux';
 import { setUser } from '../auth/authSlice';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
-import { db } from '../firebase-config'; 
+import { db } from '../firebase-config';
 import '../../components/Register.css';
 
 const auth = getAuth();
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleTabChange = (type) => {
@@ -42,17 +42,6 @@ const AuthPage = () => {
     </div>
   );
 
-  function validateEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
-
-  function validatePassword(password) {
-    
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    return passwordRegex.test(password);
-  }
-
   function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -60,16 +49,6 @@ const AuthPage = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-
-      
-      if (!validateEmail(email)) {
-        setError('Please enter a valid email address.');
-        return;
-      }
-      if (!validatePassword(password)) {
-        setError('Password must be at least 8 characters long, contain at least 1 number, 1 uppercase and 1 lowercase letter.');
-        return;
-      }
 
       try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -132,19 +111,6 @@ const AuthPage = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();
 
-      
-      if (!name) {
-        setError('Full name is required.');
-        return;
-      }
-      if (!validateEmail(email)) {
-        setError('Please enter a valid email address.');
-        return;
-      }
-      if (!validatePassword(password)) {
-        setError('Password must be at least 8 characters long, contain at least 1 number, 1 uppercase and 1 lowercase letter.');
-        return;
-      }
       if (password !== confirmPassword) {
         setError('Passwords do not match.');
         return;
@@ -171,7 +137,7 @@ const AuthPage = () => {
     return (
       <form className="register-form" onSubmit={handleSubmit}>
         <h2>Register</h2>
-        
+
         <div className="form-group">
           <label htmlFor="register-name">Full Name</label>
           <input
