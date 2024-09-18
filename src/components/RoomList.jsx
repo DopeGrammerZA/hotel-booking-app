@@ -1,18 +1,26 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRooms } from '../firebase/auth/roomsSlice';  // Fetch rooms action from roomsSlice
-import './RoomList.css';  // Import the CSS file for styling
+import { fetchRooms, selectRoom } from '../firebase/auth/roomsSlice';  
+import { useNavigate } from 'react-router-dom'; 
+import './RoomList.css';
 
 const RoomList = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // Get rooms, loading, and error state from Redux
+  // Access the Redux state
   const { rooms, loading, error } = useSelector((state) => state.rooms);
 
-  // Fetch rooms when the component mounts
+  // Fetch rooms from Firebase on component mount
   useEffect(() => {
     dispatch(fetchRooms());
   }, [dispatch]);
+
+  // Handle room selection
+  const handleRoomSelection = (room) => {
+    dispatch(selectRoom(room));  // Store the selected room in Redux state
+    navigate('/confirm-room');   // Navigate to the confirmation page
+  };
 
   if (loading) {
     return <p>Loading rooms...</p>;
@@ -29,7 +37,7 @@ const RoomList = () => {
           <div key={room.id} className="room-card">
             <h3>{room.name}</h3>
             <p>{room.description}</p>
-            <p className="price">Price per night: ${room.pricePerNight}</p>
+            <p className="price">Price per night: R{room.price}</p>
             <button onClick={() => handleRoomSelection(room)}>Select Room</button>
           </div>
         ))
@@ -38,12 +46,6 @@ const RoomList = () => {
       )}
     </div>
   );
-};
-
-// Example function to handle room selection
-const handleRoomSelection = (room) => {
-  console.log('Selected Room:', room);
-  // Redirect to booking page or store selected room in Redux
 };
 
 export default RoomList;

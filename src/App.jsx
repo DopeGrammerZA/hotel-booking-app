@@ -11,7 +11,10 @@ import ReviewPage from './components/ReviewsSection';
 import EditProfile from './components/EditProfile';
 import AccommodationList from './components/AccommodationList';
 import AdminDashboard from './components/AdminDashboard';
-import RoomList from './components/RoomList'
+import RoomList from './components/RoomList';
+import ConfirmRoom from './components/ConfirmRoom';
+import Payment from './components/Payment';
+
 
 
 
@@ -37,6 +40,8 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/roomlist" element={<RoomList />} />  
+          <Route path="/confirm-room" element={<ConfirmRoom />} />
+          <Route path="/payment" element={<Payment />} />
         </Routes>
       </div>
     </Router>
