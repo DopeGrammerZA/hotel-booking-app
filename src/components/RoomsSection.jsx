@@ -31,7 +31,7 @@ const RoomsSection = () => {
   const navigate = useNavigate();
 
   const handleBookNowClick = (roomId) => {
-    navigate(`/adminDashboard/${roomId}`); 
+    navigate(`/roomList`); 
   };
   
   return (

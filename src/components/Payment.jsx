@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { clearSelectedRoom } from '../firebase/auth/roomsSlice';
 import './Payment.css';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
-import { app } from '../firebase/firebase-config'; // Ensure this path is correct
+import { app } from '../firebase/firebase-config';
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Payment = () => {
       return;
     }
 
-    // Load PayPal script
+   
     const loadPayPalScript = () => {
       return new Promise((resolve, reject) => {
         if (document.getElementById('paypal-script')) {
@@ -50,7 +50,7 @@ const Payment = () => {
             onApprove: async (data, actions) => {
               await actions.order.capture();
               console.log('Payment successful:', data);
-              await handlePaymentSuccess(); // Call to handle successful payment and save to Firestore
+              await handlePaymentSuccess(); 
             },
             onError: (err) => {
               console.error('PayPal payment error:', err);
@@ -63,7 +63,7 @@ const Payment = () => {
       });
 
     return () => {
-      // Clean up PayPal script
+   
       const script = document.getElementById('paypal-script');
       if (script) {
         document.body.removeChild(script);
@@ -73,7 +73,7 @@ const Payment = () => {
 
   const handlePaymentSuccess = async () => {
     try {
-      // Save booking to Firestore
+      
       const bookingsCollection = collection(db, 'bookings');
       await addDoc(bookingsCollection, {
         roomName: selectedRoom.name,
@@ -97,7 +97,6 @@ const Payment = () => {
 
   return (
     <div className="payment">
-      <h2>Payment Page</h2>
       <div className="room-details">
         <h3>{selectedRoom.name}</h3>
         <p>{selectedRoom.description}</p>
