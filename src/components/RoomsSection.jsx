@@ -7,21 +7,21 @@ const rooms = [
   {
     id: 1,
     name: "Deluxe Suite",
-    price: "R 299/night",
+    price: "R 5000/night",
     features: ["King-sized Bed", "Ocean View", "Private Balcony", "Luxury Bath"],
     image: "../assets/bg-pic.jpg"
   },
   {
     id: 2,
     name: "Executive Room",
-    price: "R 199/night",
+    price: "R 3000/night",
     features: ["Queen-sized Bed", "City View", "Work Desk", "Mini Bar"],
     image: "../assets/bg-pic.jpg"
   },
   {
     id: 3,
     name: "Standard Room",
-    price: "R 129/night",
+    price: "R 2500/night",
     features: ["Double Bed", "Garden View", "Free Wi-Fi", "Coffee Maker"],
     image: "../assets/bg-pic.jpg"
   }

@@ -8,18 +8,18 @@ const RoomList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Access the Redux state
+
   const { rooms, loading, error } = useSelector((state) => state.rooms);
 
-  // Fetch rooms from Firebase on component mount
+
   useEffect(() => {
     dispatch(fetchRooms());
   }, [dispatch]);
 
-  // Handle room selection
+
   const handleRoomSelection = (room) => {
-    dispatch(selectRoom(room));  // Store the selected room in Redux state
-    navigate('/confirm-room');   // Navigate to the confirmation page
+    dispatch(selectRoom(room));  
+    navigate('/confirm-room');   
   };
 
   if (loading) {
