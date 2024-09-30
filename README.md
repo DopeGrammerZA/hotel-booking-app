@@ -40,13 +40,18 @@ To run the app locally, follow these steps:
 
     cd hotel-booking-app
 
-# 3. Install dependencies:
+# 3 Open the project with Visual Studio
+
+# 4 Use the git checkout command to navigate to the 'dev' branch
+    git checkout dev
+
+# 5. Install dependencies:
 
     npm install
 
-# 4 Set up Firebase and configure the necessary environment variables.
+# 6 Set up Firebase and configure the necessary environment variables.
 
-# 5. Start the development server:
+# 7. Start the development server:
 
     npm run dev
 
