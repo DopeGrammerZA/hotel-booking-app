@@ -43,7 +43,7 @@ export const deleteAccommodation = createAsyncThunk(
   }
 );
 
-// Slice
+
 const accommodationsSlice = createSlice({
   name: 'accommodations',
   initialState,
@@ -76,7 +76,7 @@ const accommodationsSlice = createSlice({
   },
 });
 
-// Selector
+
 export const selectAccommodations = createSelector(
   (state) => state.accommodations.accommodations,
   (accommodations) => accommodations || []

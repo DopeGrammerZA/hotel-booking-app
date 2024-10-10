@@ -30,7 +30,6 @@ const ConfirmRoom = () => {
 
   const handleConfirmBooking = () => {
     if (selectedRoom) {
-      console.log('Room confirmed:', selectedRoom);
       navigate('/payment');
     } else {
       console.error('Cannot confirm booking. No room selected.');

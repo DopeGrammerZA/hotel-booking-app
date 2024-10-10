@@ -1,7 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RoomsSection.css';
-import img from '../assets/about-pic.jpg'; 
+import img1 from '../assets/about-pic.jpg';
+import img2 from '../assets/room1.jpg';
+import img3 from '../assets/room2.jpg';
+
+
 
 const rooms = [
   {
@@ -9,21 +13,21 @@ const rooms = [
     name: "Deluxe Suite",
     price: "R 5000/night",
     features: ["King-sized Bed", "Ocean View", "Private Balcony", "Luxury Bath"],
-    image: "../assets/bg-pic.jpg"
+    image: img1
   },
   {
     id: 2,
     name: "Executive Room",
     price: "R 3000/night",
     features: ["Queen-sized Bed", "City View", "Work Desk", "Mini Bar"],
-    image: "../assets/bg-pic.jpg"
+    image: img2
   },
   {
     id: 3,
     name: "Standard Room",
     price: "R 2500/night",
     features: ["Double Bed", "Garden View", "Free Wi-Fi", "Coffee Maker"],
-    image: "../assets/bg-pic.jpg"
+    image: img3
   }
 ];
 

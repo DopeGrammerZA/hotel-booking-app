@@ -1,5 +1,7 @@
 import React from 'react';
 import './ReviewsSection.css';
+import pic from '../assets/room2.jpg';
+import review from '../assets/review.jpg';
 
 const reviews = [
   {
@@ -7,47 +9,47 @@ const reviews = [
     reviewer: "John Doe",
     rating: 5,
     review: "Amazing stay! The Deluxe Suite was luxurious, and the view was breathtaking. Highly recommend!",
-    image: "../assets/reviewer1.jpg"
+    image: review
   },
   {
     id: 2,
     reviewer: "Jane Smith",
     rating: 4,
     review: "The Executive Room was comfortable and the city view was great. Will definitely be coming back!",
-    image: "../assets/reviewer2.jpg"
+    image: pic
   },
   {
     id: 3,
     reviewer: "Emily Johnson",
     rating: 5,
     review: "Excellent service and the Standard Room was cozy. Loved the free Wi-Fi and coffee maker!",
-    image: "../assets/reviewer3.jpg"
+    image: review
   },{
     id: 4,
     reviewer: "Jane Smith",
     rating: 4,
     review: "The Executive Room was comfortable and the city view was great. Will definitely be coming back!",
-    image: "../assets/reviewer2.jpg"
+    image: review
   },
   {
     id: 5,
     reviewer: "Emily Johnson",
     rating: 5,
     review: "Excellent service and the Standard Room was cozy. Loved the free Wi-Fi and coffee maker!",
-    image: "../assets/reviewer3.jpg"
+    image: pic
   },{
     id: 6,
     reviewer: "Jane Smith",
     rating: 4,
     review: "The Executive Room was comfortable and the city view was great. Will definitely be coming back!",
-    image: "../assets/reviewer2.jpg"
+    image: pic
   },
   {
     id: 7,
     reviewer: "Emily Johnson",
     rating: 5,
     review: "Excellent service and the Standard Room was cozy. Loved the free Wi-Fi and coffee maker!",
-    image: "../assets/reviewer3.jpg"
+    image: pic
   }
 ];
 

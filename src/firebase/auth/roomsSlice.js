@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchRoomsFromFirebase } from '../firebase-config'; 
 
-// Define the thunk action for fetching rooms
+
 export const fetchRooms = createAsyncThunk('rooms/fetchRooms', async () => {
   const rooms = await fetchRoomsFromFirebase(); 
   return rooms;
