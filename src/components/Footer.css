@@ -33,6 +33,13 @@
     margin-bottom: 0.5rem;
   }
   
+  .footer-section ul li:hover, .footer-section ul li a:hover {
+    color: gold;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  
+
   .footer-section ul li a {
     color: #fff;
     text-decoration: none;
@@ -91,3 +98,6 @@
     }
   }
   
+  .footer h3{
+    color: gold;
+  }

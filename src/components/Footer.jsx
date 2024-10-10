@@ -16,9 +16,12 @@ const Footer = () => {
         </div>
         <div className="footer-section contact-info">
           <h3>Contact Us</h3>
-          <p><strong>Address:</strong> 1937 Pretoria, South Africa</p>
-          <p><strong>Phone:</strong> 10111 </p>
-          <p><strong>Email:</strong> info@Peaceful.co.za</p>
+          <ul>
+            <li></li>
+            <li><strong>Address:</strong> 1937 Pretoria, South Africa</li>
+            <li><strong>Phone:</strong> 10111 </li>
+            <li><strong>Email:</strong> <a href="mailto:info@Peaceful.co.za">info@Peaceful.co.za</a></li>
+          </ul>
         </div>
         <div className="footer-section social-media">
           <h3>Follow Us</h3>
