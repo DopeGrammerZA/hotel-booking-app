@@ -1,42 +1,90 @@
 .confirm-room {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .room-details {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .room-details h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .room-details p {
-    font-size: 1rem;
-    margin-bottom: 8px;
-  }
-  
-  .price {
-    font-weight: bold;
-    color: green;
-  }
-  
-  .confirm-buttons {
-    display: flex;
-    gap: 10px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #ddd;
-  }
-  
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.room-details {
+  margin-bottom: 20px;
+}
+
+.room-title {
+  font-size: 2rem;
+  color: #2c3e50;
+}
+
+.room-description {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.room-price {
+  font-size: 1.5rem;
+  color: #e74c3c;
+  margin: 10px 0;
+}
+
+.room-amenities {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+.confirmation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.confirm-button, .cancel-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.confirm-button {
+  background-color: #3498db;
+  color: white;
+}
+
+.confirm-button:hover {
+  background-color: #2980b9;
+  transform: scale(1.05);
+}
+
+.cancel-button {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+.booking-info {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.booking-info h4 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+}
+
+.booking-info ul {
+  list-style-type: none;
+  padding: 0;
+  color: #555;
+}
+
+.booking-info li {
+  font-size: 1.1rem;
+  margin: 5px 0;
+}

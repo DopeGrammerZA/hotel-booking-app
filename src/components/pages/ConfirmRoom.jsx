@@ -8,20 +8,10 @@ const ConfirmRoom = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  
-  const storedRoom = localStorage.getItem('selectedRoom');
-  const initialSelectedRoom = storedRoom ? JSON.parse(storedRoom) : null;
-  const selectedRoom = useSelector((state) => state.rooms.selectedRoom) || initialSelectedRoom;
+
+  const selectedRoom = useSelector((state) => state.rooms.selectedRoom);
 
   useEffect(() => {
-   
-    if (selectedRoom) {
-      localStorage.setItem('selectedRoom', JSON.stringify(selectedRoom));
-    }
-  }, [selectedRoom]);
-
-  useEffect(() => {
-    
     if (!selectedRoom) {
       console.log('No selected room found. Redirecting to /roomlist.');
       navigate('/roomlist');
@@ -39,24 +29,35 @@ const ConfirmRoom = () => {
 
   const handleCancel = () => {
     dispatch(clearSelectedRoom());
-    localStorage.removeItem('selectedRoom'); 
     navigate('/roomlist');
   };
 
   if (!selectedRoom) {
-    
     return <div>Redirecting...</div>;
   }
 
   return (
     <div className="confirm-room">
       <div className="room-details">
-        <h3>{selectedRoom.name}</h3>
-        <p>{selectedRoom.description}</p>
-        <p className="price">Price per night: R{selectedRoom.price}</p>
+        <h3 className="room-title">{selectedRoom.name}</h3>
+        <p className="room-description">{selectedRoom.description}</p>
+        <p className="room-price">Price per night: <strong>R {selectedRoom.pricePerNight}</strong></p>
+        <p className="room-amenities">
+          <strong>Amenities:</strong> {Array.isArray(selectedRoom.amenities) ? selectedRoom.amenities.join(', ') : selectedRoom.amenities || 'No amenities listed'}
+        </p>
       </div>
-      <button onClick={handleConfirmBooking}>Confirm and Proceed to Payment</button>
-      <button onClick={handleCancel}>Cancel</button>
+      <div className="confirmation-buttons">
+        <button className="confirm-button" onClick={handleConfirmBooking}>✨ Confirm and Proceed to Payment ✨</button>
+        <button className="cancel-button" onClick={handleCancel}>❌ Cancel</button>
+      </div>
+      <div className="booking-info">
+        <h4>Why book with us?</h4>
+        <ul>
+          <li>✅ Best Price Guarantee</li>
+          <li>✅ Flexible Cancellation Policy</li>
+          <li>✅ Exceptional Customer Support</li>
+        </ul>
+      </div>
     </div>
   );
 };

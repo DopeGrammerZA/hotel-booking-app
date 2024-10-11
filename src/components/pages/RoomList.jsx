@@ -8,14 +8,11 @@ const RoomList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
   const { rooms, loading, error } = useSelector((state) => state.rooms);
-
 
   useEffect(() => {
     dispatch(fetchRooms());
   }, [dispatch]);
-
 
   const handleRoomSelection = (room) => {
     dispatch(selectRoom(room));  
@@ -32,13 +29,19 @@ const RoomList = () => {
 
   return (
     <div className="room-list">
+      <h2 className="title">Available Rooms</h2>
       {rooms.length > 0 ? (
         rooms.map((room) => (
           <div key={room.id} className="room-card">
-            <h3>{room.name}</h3>
-            <p>{room.description}</p>
+            <h3 className="room-name">{room.name}</h3>
+            <p className="room-description">{room.description}</p>
+            <p className="room-location">Location: {room.location}</p>
+            <p className="room-rating">Rating: {room.rating}</p>
             <p className="price">Price per night: R{room.price}</p>
-            <button onClick={() => handleRoomSelection(room)}>Select Room</button>
+            <p className="room-amenities">
+              Amenities: {Array.isArray(room.amenities) ? room.amenities.join(', ') : room.amenities || 'No amenities listed'}
+            </p>
+            <button className="select-button" onClick={() => handleRoomSelection(room)}>Select Room</button>
           </div>
         ))
       ) : (
