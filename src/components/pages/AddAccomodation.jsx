@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAccommodations, deleteAccommodation } from '../firebase/auth/accommodationSlice';
+import { fetchAccommodations, deleteAccommodation } from '../../firebase/auth/accommodationSlice';
 import { Link } from 'react-router-dom';
 
 const AccommodationList = () => {

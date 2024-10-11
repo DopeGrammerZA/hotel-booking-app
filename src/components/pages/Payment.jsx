@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { clearSelectedRoom } from '../firebase/auth/roomsSlice';
-import './Payment.css';
+import { clearSelectedRoom } from '../../firebase/auth/roomsSlice';
+import '../css/Payment.css';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
-import { app } from '../firebase/firebase-config';
+import { app } from '../../firebase/firebase-config';
 
 const Payment = () => {
   const navigate = useNavigate();

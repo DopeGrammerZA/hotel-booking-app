@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../auth/authSlice';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
-import '../../components/Register.css';
+import '../../components/css/Register.css';
 
 const auth = getAuth();
 

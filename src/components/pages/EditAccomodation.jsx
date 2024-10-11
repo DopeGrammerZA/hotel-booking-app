@@ -1,6 +1,6 @@
 import { useState,   } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateAccommodation } from '../firebase/auth/accommodationSlice'; 
+import { updateAccommodation } from '../../firebase/auth/accommodationSlice'; 
 import { useParams, useNavigate } from 'react-router-dom';
 
 const EditAccommodation = () => {

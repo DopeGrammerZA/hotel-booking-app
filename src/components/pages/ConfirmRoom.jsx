@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { clearSelectedRoom } from '../firebase/auth/roomsSlice';
-import './ConfirmRoom.css';
+import { clearSelectedRoom } from '../../firebase/auth/roomsSlice';
+import '../css/ConfirmRoom.css';
 
 const ConfirmRoom = () => {
   const navigate = useNavigate();

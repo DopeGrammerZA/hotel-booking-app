@@ -1,19 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HeroSection from './components/HeroSection';
-import AboutSection from './components/AboutSection';
-import RoomsSection from './components/RoomsSection';
-import Footer from './components/Footer';
-import RoomDetails from './components/RoomDetails';
+import HeroSection from './components/pages/HeroSection';
+import AboutSection from './components/pages/AboutSection';
+import RoomsSection from './components/pages/RoomsSection';
+import Footer from './components/pages/Footer';
+import RoomDetails from './components/pages/RoomDetails';
 import AuthPage from './firebase/auth/AuthPage';
-import Dashboard from './components/Dashboard';
-import ForgotPasswordPage from './components/ForgotPassword';
-import ReviewPage from './components/ReviewsSection';
-import EditProfile from './components/EditProfile';
-import AccommodationList from './components/AccommodationList';
-import AdminDashboard from './components/AdminDashboard';
-import RoomList from './components/RoomList';
-import ConfirmRoom from './components/ConfirmRoom';
-import Payment from './components/Payment';
+import Dashboard from './components/pages/Dashboard';
+import ForgotPasswordPage from './components/pages/ForgotPassword';
+import ReviewPage from './components/pages/ReviewsSection';
+import EditProfile from './components/pages/EditProfile';
+import AccommodationList from './components/pages/AccommodationList';
+import AdminDashboard from './components/pages/AdminDashboard';
+import RoomList from './components/pages/RoomList';
+import ConfirmRoom from './components/pages/ConfirmRoom';
+import Payment from './components/pages/Payment';
 
 
 
