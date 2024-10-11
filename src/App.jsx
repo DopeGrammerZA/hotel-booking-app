@@ -4,7 +4,7 @@ import AboutSection from './components/pages/AboutSection';
 import RoomsSection from './components/pages/RoomsSection';
 import Footer from './components/pages/Footer';
 import RoomDetails from './components/pages/RoomDetails';
-import AuthPage from './firebase/auth/AuthPage';
+import AuthPage from './components/auth/AuthPage';
 import Dashboard from './components/pages/Dashboard';
 import ForgotPasswordPage from './components/pages/ForgotPassword';
 import ReviewPage from './components/pages/ReviewsSection';

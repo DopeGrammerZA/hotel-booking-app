@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { signOutUser } from '../../firebase/auth/authSlice';
+import { signOutUser } from '../../redux/authSlice';
 import '../css/adminDashboard.css';
 
 const AdminDashboard = () => {

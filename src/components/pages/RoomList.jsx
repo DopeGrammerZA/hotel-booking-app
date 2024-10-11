@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRooms, selectRoom } from '../../firebase/auth/roomsSlice';  
+import { fetchRooms, selectRoom } from '../../redux/roomsSlice';  
 import { useNavigate } from 'react-router-dom'; 
 import '../css/RoomList.css';
 

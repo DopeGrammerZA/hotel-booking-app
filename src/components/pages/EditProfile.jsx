@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getAuth, updateProfile, updateEmail } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../../firebase/firebase-config';
+import { db } from '../../firebase/config/firebase-config';
 import '../css/EditProfile.css'
 
 const EditProfile = () => {

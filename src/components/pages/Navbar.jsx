@@ -3,7 +3,7 @@ import '../css/Navbar.css';
 import { Link } from 'react-router-dom';
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-import { listenToAuthChanges, signOutUser } from '../../firebase/auth/authSlice'; 
+import { listenToAuthChanges, signOutUser } from '../../redux/authSlice'; 
 
 const Navbar = () => {
   const dispatch = useDispatch();

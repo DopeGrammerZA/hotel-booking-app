@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchRoomsFromFirebase } from '../firebase-config'; 
+import { fetchRoomsFromFirebase } from '../firebase/config/firebase-config'; 
 
 
 export const fetchRooms = createAsyncThunk('rooms/fetchRooms', async () => {
