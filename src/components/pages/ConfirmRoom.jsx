@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { clearSelectedRoom } from '../../redux/roomsSlice';
 import '../css/ConfirmRoom.css';
+import Navbar from './Navbar';
+import Footer from './Footer'
 
 const ConfirmRoom = () => {
   const navigate = useNavigate();
@@ -37,7 +39,9 @@ const ConfirmRoom = () => {
   }
 
   return (
-    <div className="confirm-room">
+    <div>
+        <Navbar/>
+        <div className="confirm-room">
       <div className="room-details">
         <h3 className="room-title">{selectedRoom.name}</h3>
         <p className="room-description">{selectedRoom.description}</p>
@@ -58,6 +62,9 @@ const ConfirmRoom = () => {
           <li>✅ Exceptional Customer Support</li>
         </ul>
       </div>
+    </div>
+
+      <Footer/>
     </div>
   );
 };

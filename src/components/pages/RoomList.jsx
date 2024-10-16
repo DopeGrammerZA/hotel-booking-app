@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchRooms, selectRoom } from '../../redux/roomsSlice';  
 import { useNavigate } from 'react-router-dom'; 
 import '../css/RoomList.css';
+import Navbar from './Navbar';
+import Footer from './Footer'
 
 const RoomList = () => {
   const dispatch = useDispatch();
@@ -28,7 +30,9 @@ const RoomList = () => {
   }
 
   return (
-    <div className="room-list">
+    <div>
+      <Navbar/>
+        <div className="room-list">
       <h2 className="title">Available Rooms</h2>
       {rooms.length > 0 ? (
         rooms.map((room) => (
@@ -37,7 +41,7 @@ const RoomList = () => {
             <p className="room-description">{room.description}</p>
             <p className="room-location">Location: {room.location}</p>
             <p className="room-rating">Rating: {room.rating}</p>
-            <p className="price">Price per night: R{room.price}</p>
+            <p className="price">Price per night: R{room.pricePerNight}</p>
             <p className="room-amenities">
               Amenities: {Array.isArray(room.amenities) ? room.amenities.join(', ') : room.amenities || 'No amenities listed'}
             </p>
@@ -48,6 +52,9 @@ const RoomList = () => {
         <p>No rooms available at the moment.</p>
       )}
     </div>
+    <Footer/>
+    </div>
+    
   );
 };
 

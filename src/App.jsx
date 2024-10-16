@@ -14,6 +14,7 @@ import AdminDashboard from './components/pages/AdminDashboard';
 import RoomList from './components/pages/RoomList';
 import ConfirmRoom from './components/pages/ConfirmRoom';
 import Payment from './components/pages/Payment';
+import AboutPage from './components/pages/AboutPage';
 
 
 
@@ -42,6 +43,8 @@ function App() {
           <Route path="/roomlist" element={<RoomList />} />  
           <Route path="/confirm-room" element={<ConfirmRoom />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/about" element={<AboutPage />} />
+          
         </Routes>
       </div>
     </Router>
