@@ -62,7 +62,7 @@ const AuthPage = () => {
         if (userData?.role === 'admin' && user.email === 'AdminOnly@gmail.com') {
           navigate('/adminDashboard');
         } else {
-          navigate('/Dashboard');
+          navigate('/payment');
         }
       } catch (error) {
         setError('Failed to login. Please check your email and password.');
