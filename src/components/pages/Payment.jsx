@@ -88,7 +88,7 @@ const Payment = () => {
           <strong>Description:</strong> {selectedRoom.description}
         </p>
         <p className="max-guests">
-          <strong>Max Guests:</strong> {selectedRoom.maxGuests}
+          <strong>Max Guests:</strong> {selectedRoom.maxOccupancy}
         </p>
         <p className="amenities">
           <strong>Amenities:</strong> {Array.isArray(selectedRoom.amenities) && selectedRoom.amenities.length > 0
