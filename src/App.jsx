@@ -15,6 +15,7 @@ import RoomList from './components/pages/RoomList';
 import ConfirmRoom from './components/pages/ConfirmRoom';
 import Payment from './components/pages/Payment';
 import AboutPage from './components/pages/AboutPage';
+import ContactUs from './components/pages/ContactUs';
 
 
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="/confirm-room" element={<ConfirmRoom />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactUs />} />
           
         </Routes>
       </div>
