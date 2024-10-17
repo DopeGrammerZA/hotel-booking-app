@@ -18,7 +18,7 @@ const RoomList = () => {
 
   const handleRoomSelection = (room) => {
     dispatch(selectRoom(room));  
-    navigate('/confirm-room');   
+    navigate('/room/:id');   
   };
 
   if (loading) {

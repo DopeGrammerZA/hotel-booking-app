@@ -1,72 +1,42 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import '../css/RoomDetails.css';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
-const rooms = [
-  {
-    id: 1,
-    name: "Deluxe Suite",
-    price: "R 299/night",
-    features: ["King-sized Bed", "Ocean View", "Private Balcony", "Luxury Bath"],
-    image: "/assets/bg-pic.jpg",
-    description: "Enjoy the luxury of our Deluxe Suite with stunning ocean views and all the amenities you need for a perfect stay.",
-    policies: ["Check-in: 3 PM", "Check-out: 11 AM", "No Smoking", "Pets Allowed"]
-  },
-  {
-    id: 2,
-    name: "Executive Room",
-    price: "R 199/night",
-    features: ["Queen-sized Bed", "City View", "Work Desk", "Mini Bar"],
-    image: "/assets/bg-pic.jpg",
-    description: "The Executive Room offers a comfortable and elegant space ideal for business travelers, featuring a work desk and mini bar.",
-    policies: ["Check-in: 3 PM", "Check-out: 11 AM", "No Smoking"]
-  },
-  {
-    id: 3,
-    name: "Standard Room",
-    price: "R 129/night",
-    features: ["Double Bed", "Garden View", "Free Wi-Fi", "Coffee Maker"],
-    image: "/assets/bg-pic.jpg",
-    description: "Our Standard Room provides a cozy and affordable option with a lovely garden view and essential amenities.",
-    policies: ["Check-in: 3 PM", "Check-out: 11 AM", "No Smoking"]
-  }
-];
-
-const RoomDetails = () => {
-  const { id } = useParams();
+const RoomDetail = () => {
   const navigate = useNavigate();
-  const room = rooms.find(room => room.id === parseInt(id, 10));
+  const selectedRoom = useSelector((state) => state.rooms.selectedRoom);
 
-  if (!room) {
-    return <p>Room not found!</p>;
+
+  if (!selectedRoom) {
+    return <div>Redirecting...</div>; 
   }
-
   return (
-    <section className="room-details-container">
-      <img src={room.image} alt={room.name} className="room-details-image" />
-      <div className="room-details-info">
-        <h1 className="room-details-name">{room.name}</h1>
-        <p className="room-details-price">{room.price}</p>
-        <p className="room-details-description">{room.description}</p>
-        <ul className="room-details-features">
-          {room.features.map((feature, index) => (
-            <li key={index}>{feature}</li>
-          ))}
-        </ul>
-        <div className="room-details-policies">
-          <h2>Policies</h2>
-          <ul>
-            {room.policies.map((policy, index) => (
-              <li key={index}>{policy}</li>
-            ))}
-          </ul>
+    <div>
+      <Navbar />
+      <div className="room-detail">
+        <h2>{selectedRoom.name}</h2>
+        <div className="room-images">
+          {selectedRoom.images && selectedRoom.images.length > 0 ? (
+            selectedRoom.images.map((image, index) => (
+              <img key={index} src={image} alt={`Room ${selectedRoom.name} - Image ${index + 1}`} />
+            ))
+          ) : (
+            <p>No images available for this room.</p>
+          )}
         </div>
-        <button className="btn-book-room" onClick={() => navigate('/login')}>
-          Book Now
-        </button>
+        <p><strong>Description:</strong> {selectedRoom.description}</p>
+        <p><strong>Location:</strong> {selectedRoom.location}</p>
+        <p><strong>Rating:</strong> {selectedRoom.rating}</p>
+        <p><strong>Price per night:</strong> R{selectedRoom.pricePerNight}</p>
+        <p><strong>Amenities:</strong> {Array.isArray(selectedRoom.amenities) ? selectedRoom.amenities.join(', ') : selectedRoom.amenities || 'No amenities listed'}</p>
+
+        <button onClick={() => navigate('/confirm-room')}>Book Room</button>
       </div>
-    </section>
+      <Footer />
+    </div>
   );
 };
 
-export default RoomDetails;
+export default RoomDetail;

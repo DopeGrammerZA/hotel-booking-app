@@ -45,6 +45,12 @@ const AccommodationList = () => {
       amenities: amenitiesArray
     };
 
+    if (!editMode) {
+      const existingIds = accommodations.map(acc => acc.id);
+      const newId = existingIds.length > 0 ? Math.max(...existingIds) + 1 : 1;
+      accommodationData.id = newId; 
+    }
+
     if (editMode) {
       dispatch(updateAccommodation({ id: currentAccommodation.id, updatedData: accommodationData }));
       setEditMode(false);
