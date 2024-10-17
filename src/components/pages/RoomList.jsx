@@ -30,10 +30,14 @@ const RoomList = () => {
   }
 
   return (
-    <div>
+    <div className='room-list-container'>
       <Navbar/>
-        <div className="room-list">
-      <h2 className="title">Available Rooms</h2>
+      <div className='room-list-title'>
+          <h2 className="room-list-title">Available Rooms</h2>
+      </div>
+      
+      <div className="room-list">
+      
       {rooms.length > 0 ? (
         rooms.map((room) => (
           <div key={room.id} className="room-card">

@@ -4,7 +4,15 @@
   gap: 20px; 
   justify-content: center;
   padding: 20px;
+  margin-bottom: 60px;
 }
+
+.room-list-title h2{
+  display: flex;
+  justify-content: center;
+  margin-top: 90px;
+}
+
 
 .room-card {
   background-color: #ffffff;
