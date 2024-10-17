@@ -3,7 +3,7 @@ import '../css/ContactUs.css';
 import Navbar from './Navbar'; 
 import Footer from './Footer'; 
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
-import emailjs from 'emailjs-com'; // Import EmailJS
+import emailjs from 'emailjs-com'; 
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +23,7 @@ const ContactUs = () => {
     e.preventDefault();
 
     
-    emailjs.send('service_bkaqjmp', 'template_jnemrxs', formData, 'BgRKlOYVHby05GBTi')
+    emailjs.send('service_bkaqjmp', 'template_p2nsubd', formData, 'BgRKlOYVHby05GBTi')
       .then((response) => {
         console.log('Email sent successfully!', response.status, response.text);
         setSuccessMessage('Your message has been sent successfully!');
