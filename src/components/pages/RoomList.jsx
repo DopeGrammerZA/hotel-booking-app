@@ -10,13 +10,16 @@ const RoomList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  
+
   const { rooms, loading, error } = useSelector((state) => state.rooms);
+  console.log(rooms);
 
   useEffect(() => {
     dispatch(fetchRooms());
   }, [dispatch]);
 
-  const handleRoomSelection = (room) => {
+  const handleRoomSelection = (room) => { 
     dispatch(selectRoom(room));  
     navigate('/room/:id');   
   };

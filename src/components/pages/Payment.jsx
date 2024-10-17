@@ -5,6 +5,7 @@ import Footer from './Footer'
 
 const Payment = () => {
   const selectedRoom = useSelector((state) => state.rooms.selectedRoom);
+  console.log(selectedRoom.pricePerNight);
 
   useEffect(() => {
     if (!selectedRoom) {
@@ -30,7 +31,7 @@ const Payment = () => {
     }
 
     const script = document.createElement('script');
-    script.src = `https://www.paypal.com/sdk/js?client-id=ARssujueJx8vqVKCnN0nM3Dj9XUvos2Xk3fBMpaDa4VjbqI6PgpzP7r3Fkh92s9mGIrj-VagybipbyOk`; 
+    script.src = `https://www.paypal.com/sdk/js?client-id=AQtSK5Iw9PZJ_HmdAOVsQlF4AWFuR-OTzOKrZzdXWBYv2HysWxGhMKNb5rZ6wFsmMlromjBOFiW3mZJ2`; 
     script.onload = () => {
       if (!window.paypal) {
         console.error('PayPal SDK failed to load.');
@@ -42,7 +43,7 @@ const Payment = () => {
           return window.paypal.order.create({
             purchase_units: [{
               amount: {
-                value: selectedRoom.pricePerNight.toFixed(2),
+                value: selectedRoom.pricePerNight,
               },
             }],
           }).catch(error => {
@@ -82,7 +83,7 @@ const Payment = () => {
       <h2 className="payment-title">Payment for {selectedRoom.name}</h2>
       <div className="payment-details">
         <p className="price">
-          <strong>Price:</strong> R{selectedRoom.pricePerNight}
+          <strong>Price:</strong> R {selectedRoom.pricePerNight}
         </p>
         <p className="description">
           <strong>Description:</strong> {selectedRoom.description}
