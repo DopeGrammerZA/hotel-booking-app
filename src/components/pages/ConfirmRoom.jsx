@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { clearSelectedRoom } from '../../redux/roomsSlice';
-import { listenToAuthChanges, selectUser } from '../../redux/authSlice'; // Import selectUser
+import { listenToAuthChanges, selectUser } from '../../redux/authSlice'; 
 import '../css/ConfirmRoom.css';
 import Footer from './Footer';
 
@@ -11,10 +11,9 @@ const ConfirmRoom = () => {
   const dispatch = useDispatch();
 
   const selectedRoom = useSelector((state) => state.rooms.selectedRoom);
-  const user = useSelector(selectUser); // Get user state directly using the selector
+  const user = useSelector(selectUser); 
 
   useEffect(() => {
-    // Listen to authentication state changes
     dispatch(listenToAuthChanges());
 
     if (!selectedRoom) {
@@ -24,16 +23,16 @@ const ConfirmRoom = () => {
   }, [navigate, selectedRoom, dispatch]);
 
   const handleConfirmBooking = () => {
-    if (user) { // Check if user is logged in
+    if (user) { 
       if (selectedRoom) {
-        navigate('/payment'); // Proceed to payment if room is selected
+        navigate('/payment'); 
       } else {
         console.error('Cannot confirm booking. No room selected.');
         navigate('/roomlist');
       }
     } else {
       console.error('User not logged in. Redirecting to login.');
-      navigate('/login'); // Redirect to login if user is not logged in
+      navigate('/login'); 
     }
   };
 
