@@ -16,11 +16,7 @@
 
 .room-images {
   display: grid;
-<<<<<<< Updated upstream
-  grid-template-columns: 1fr; 
-=======
   grid-template-columns: 1fr;  
->>>>>>> Stashed changes
   gap: 10px;
 }
 
@@ -32,11 +28,9 @@
 
 .small-images {
   display: grid;
-<<<<<<< Updated upstream
+
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
-=======
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
->>>>>>> Stashed changes
+
   gap: 10px;
 }
 
@@ -58,10 +52,7 @@ p {
   padding: 12px;
   margin-top: 20px;
   background-color: #FFD700;
-<<<<<<< Updated upstream
   border: none;
-=======
->>>>>>> Stashed changes
   border-radius: 5px;
   font-size: 18px;
   color: #333;
@@ -70,9 +61,7 @@ p {
 }
 
 .book-room-button:hover {
-<<<<<<< Updated upstream
   background-color: #FFC107;
-=======
   background-color: #FFC107; 
->>>>>>> Stashed changes
+
 }
