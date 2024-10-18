@@ -4,14 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import '../css/RoomDetails.css'; 
+
 const RoomDetail = () => {
   const navigate = useNavigate();
   const selectedRoom = useSelector((state) => state.rooms.selectedRoom);
-  console.log(selectedRoom.images[0]);
 
   if (!selectedRoom) {
     return <div>Redirecting...</div>;
   }
+
+  console.log(selectedRoom.images && selectedRoom.images[0]);
 
   return (
     <div>
@@ -24,7 +26,6 @@ const RoomDetail = () => {
               <img className="large-image" src={selectedRoom.images[0]} alt={`Room ${selectedRoom.name} - Main`} />
               <div className="small-images">
                 {selectedRoom.images.slice(1).map((image, index) => (
-                  
                   <img key={index} src={image} alt={`Room ${selectedRoom.name} - Image ${index + 2}`} />
                 ))}
               </div>
