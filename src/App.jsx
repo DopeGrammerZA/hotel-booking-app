@@ -16,6 +16,7 @@ import ConfirmRoom from './components/pages/ConfirmRoom';
 import Payment from './components/pages/Payment';
 import AboutPage from './components/pages/AboutPage';
 import ContactUs from './components/pages/ContactUs';
+import AuthRoute from './components/pages/Authroute';
 
 
 
@@ -43,9 +44,9 @@ function App() {
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/roomlist" element={<RoomList />} />  
           <Route path="/confirm-room" element={<ConfirmRoom />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/payment" element={ <AuthRoute><Payment /></AuthRoute>} />
           
         </Routes>
       </div>
