@@ -1,4 +1,3 @@
-// HeroSection.js
 import React, { useState } from 'react';
 import '../css/HeroSection.css';
 import Navbar from './Navbar';

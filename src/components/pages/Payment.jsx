@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Navbar from './Navbar';
-import Footer from './Footer'
+import Footer from './Footer';
 
 const Payment = () => {
   const selectedRoom = useSelector((state) => state.rooms.selectedRoom);
-  console.log(selectedRoom.pricePerNight);
 
   useEffect(() => {
     if (!selectedRoom) {
@@ -24,14 +23,13 @@ const Payment = () => {
   };
 
   const loadPayPalScript = () => {
-    
     if (document.querySelector(`script[src*="paypal.com/sdk/js"]`)) {
       console.log('PayPal SDK already loaded.');
       return;
     }
 
     const script = document.createElement('script');
-    script.src = `https://www.paypal.com/sdk/js?client-id=AQtSK5Iw9PZJ_HmdAOVsQlF4AWFuR-OTzOKrZzdXWBYv2HysWxGhMKNb5rZ6wFsmMlromjBOFiW3mZJ2`; 
+    script.src = `https://www.paypal.com/sdk/js?client-id=ARssujueJx8vqVKCnN0nM3Dj9XUvos2Xk3fBMpaDa4VjbqI6PgpzP7r3Fkh92s9mGIrj-VagybipbyOk`; 
     script.onload = () => {
       if (!window.paypal) {
         console.error('PayPal SDK failed to load.');
@@ -39,19 +37,21 @@ const Payment = () => {
       }
 
       window.paypal.Buttons({
-        createOrder: () => {
-          return window.paypal.order.create({
+        createOrder: (data, actions) => {
+          const price = selectedRoom.pricePerNight.toString(); 
+          return actions.order.create({
             purchase_units: [{
               amount: {
-                value: selectedRoom.pricePerNight,
+                value: price,
               },
             }],
           }).catch(error => {
             console.error('Error creating order:', error);
+            throw error; 
           });
         },
-        onApprove: (data) => {
-          return window.paypal.order.capture(data.orderID).then((details) => {
+        onApprove: (data, actions) => {
+          return actions.order.capture().then((details) => {
             handlePaymentSuccess(details);
           }).catch(handlePaymentError);
         },
@@ -79,30 +79,28 @@ const Payment = () => {
   return (
     <div>
       <Navbar/>
-        <div className="payment">
-      <h2 className="payment-title">Payment for {selectedRoom.name}</h2>
-      <div className="payment-details">
-        <p className="price">
-          <strong>Price:</strong> R {selectedRoom.pricePerNight}
-        </p>
-        <p className="description">
-          <strong>Description:</strong> {selectedRoom.description}
-        </p>
-        <p className="max-guests">
-          <strong>Max Guests:</strong> {selectedRoom.maxOccupancy}
-        </p>
-        <p className="amenities">
-          <strong>Amenities:</strong> {Array.isArray(selectedRoom.amenities) && selectedRoom.amenities.length > 0
-            ? selectedRoom.amenities.join(', ')
-            : 'No amenities listed'}
-        </p>
+      <div className="payment">
+        <h2 className="payment-title">Payment for {selectedRoom.name}</h2>
+        <div className="payment-details">
+          <p className="price">
+            <strong>Price:</strong> R {selectedRoom.pricePerNight}
+          </p>
+          <p className="description">
+            <strong>Description:</strong> {selectedRoom.description}
+          </p>
+          <p className="max-guests">
+            <strong>Max Guests:</strong> {selectedRoom.maxOccupancy}
+          </p>
+          <p className="amenities">
+            <strong>Amenities:</strong> {Array.isArray(selectedRoom.amenities) && selectedRoom.amenities.length > 0
+              ? selectedRoom.amenities.join(', ')
+              : 'No amenities listed'}
+          </p>
+        </div>
+        <div id="paypal-button-container" className="paypal-button"></div>
       </div>
-      <div id="paypal-button-container" className="paypal-button"></div>
+      <Footer/>
     </div>
-
-    <Footer/>
-    </div>
-    
   );
 };
 
