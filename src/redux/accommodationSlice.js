@@ -2,6 +2,13 @@ import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit'
 import { db } from '../firebase/config/firebase-config';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
 
+export const selectAvailableAccommodations = createSelector(
+  (state) => state.accommodations.accommodations,
+  (accommodations) => accommodations.filter(acc => acc.isAvailable === true)
+);
+  
+console.log(selectAvailableAccommodations)
+
 const initialState = {
   accommodations: [],
   status: 'idle',
@@ -43,6 +50,28 @@ export const deleteAccommodation = createAsyncThunk(
   }
 );
 
+export const checkAvailability = createAsyncThunk(
+  'accommodations/checkAvailability',
+  async ({ checkInDate, checkOutDate, numRooms, numGuests }) => {
+    const snapshot = await getDocs(collection(db, 'accommodations'));
+    const accommodations = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    
+    const availableAccommodations = accommodations.filter(accommodation => {
+      const { maxRooms, maxGuests, bookings } = accommodation;
+
+      if (numRooms <= maxRooms && numGuests <= maxGuests) {
+        return bookings.every(booking => (
+          new Date(checkOutDate) <= new Date(booking.checkInDate) || 
+          new Date(checkInDate) >= new Date(booking.checkOutDate)
+        ));
+      }
+      return false;
+    });
+
+
+    return availableAccommodations;
+  }
+);
 
 const accommodationsSlice = createSlice({
   name: 'accommodations',
@@ -72,14 +101,26 @@ const accommodationsSlice = createSlice({
       })
       .addCase(deleteAccommodation.fulfilled, (state, action) => {
         state.accommodations = state.accommodations.filter(acc => acc.id !== action.payload);
+      })
+      .addCase(checkAvailability.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(checkAvailability.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.accommodations = action.payload;
+      })
+      .addCase(checkAvailability.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
       });
   },
 });
-
 
 export const selectAccommodations = createSelector(
   (state) => state.accommodations.accommodations,
   (accommodations) => accommodations || []
 );
+
+export const selectAccommodationStatus = (state) => state.accommodations.status;
 
 export default accommodationsSlice.reducer;

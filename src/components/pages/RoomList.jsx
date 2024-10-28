@@ -57,7 +57,7 @@ const RoomList = () => {
         ))
       ) : (
         <p>No rooms available at the moment.</p>
-      )}
+      )}    
     </div>
     <Footer/>
     </div>

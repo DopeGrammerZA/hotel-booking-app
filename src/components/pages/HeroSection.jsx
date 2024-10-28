@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import '../css/HeroSection.css';
 import Navbar from './Navbar';
+import { selectAvailableAccommodations } from '../../redux/accommodationSlice';
 
 const HeroSection = () => {
   const [checkInDate, setCheckInDate] = useState('');
   const [checkOutDate, setCheckOutDate] = useState('');
-  const [numRooms, setNumRooms] = useState();
-  const [numGuests, setNumGuests] = useState();
+  const [numRooms, setNumRooms] = useState('');
+  const [numGuests, setNumGuests] = useState('');
+
+  const availableAccommodations = useSelector(selectAvailableAccommodations);
+  console.log(availableAccommodations); 
 
   const handleSearchClick = () => {
-    console.log('Searching availability for:', {
-      checkInDate,
-      checkOutDate,
-      numRooms,
-      numGuests,
-    });
+    const filteredAccommodations = availableAccommodations.filter(acc => 
+      acc.numRooms >= numRooms && acc.numGuests >= numGuests
+    );
+    
+    console.log('Filtered accommodations:', filteredAccommodations);
   };
 
   return (
@@ -29,16 +33,16 @@ const HeroSection = () => {
             value={checkInDate}
             onChange={(e) => setCheckInDate(e.target.value)}
             placeholder="Check-in date"
-            onFocus={(e) => e.target.type = 'date'}
-            onBlur={(e) => e.target.type = 'text'}
+            onFocus={(e) => (e.target.type = 'date')}
+            onBlur={(e) => (e.target.type = 'text')}
           />
           <input
             type="text"
             value={checkOutDate}
             onChange={(e) => setCheckOutDate(e.target.value)}
             placeholder="Check-out date"
-            onFocus={(e) => e.target.type = 'date'}
-            onBlur={(e) => e.target.type = 'text'}
+            onFocus={(e) => (e.target.type = 'date')}
+            onBlur={(e) => (e.target.type = 'text')}
           />
           <input
             type="number"
