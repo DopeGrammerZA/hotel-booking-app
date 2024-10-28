@@ -13,7 +13,7 @@ const RoomList = () => {
   
 
   const { rooms, loading, error } = useSelector((state) => state.rooms);
-  console.log(rooms);
+  
 
   useEffect(() => {
     dispatch(fetchRooms());

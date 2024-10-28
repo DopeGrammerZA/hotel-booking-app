@@ -5,6 +5,7 @@ import { clearSelectedRoom } from '../../redux/roomsSlice';
 import { listenToAuthChanges, selectUser } from '../../redux/authSlice'; 
 import '../css/ConfirmRoom.css';
 import Footer from './Footer';
+import Navbar from './Navbar';
 
 const ConfirmRoom = () => {
   const navigate = useNavigate();
@@ -47,6 +48,7 @@ const ConfirmRoom = () => {
 
   return (
     <div>
+      <Navbar/>
       <div className="confirm-room">
         <div className="room-details">
           <h3 className="room-title">{selectedRoom.name}</h3>
