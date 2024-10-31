@@ -1,13 +1,21 @@
 .payment-container{
-  width: 99vw;
+  width: 99vw;  
   height: 100vh;
+} 
+
+.payment-inner-contain{
   display: flex;
   justify-content: center;
-  align-items: center;  
 }
 
-.payment {
-  margin: 20px auto;
+.payment {  
+  margin-top: 150px;
+  margin-bottom: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;  
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;

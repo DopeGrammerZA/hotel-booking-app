@@ -7,6 +7,10 @@ const AboutSection = () => {
   return (
     <section className="about-section">
       <div className="about-content">
+       
+        <div className="about-image">
+          <img src="https://i.pinimg.com/564x/d3/67/29/d36729d8b01181085b8bf78085ddecfb.jpg" alt="Luxurious hotel interior" />
+        </div>
         <div className="about-text">
           <h2>Experience Unmatched Luxury</h2>
           <p>
@@ -21,10 +25,7 @@ const AboutSection = () => {
           <p>
             Discover the perfect getaway with us. Whether you're here for relaxation or adventure, our dedicated staff is here to ensure your stay is nothing short of extraordinary.
           </p>
-        </div>
-        <div className="about-image">
-          <img src={img} alt="Luxurious hotel interior" />
-        </div>
+        </div>  
       </div>
     </section>
   );

@@ -12,9 +12,15 @@
   z-index: 1000;
 }
 
+.navbar-logo-text{
+  color: #D4AF37;
+  font-size: 35px;
+}
+
 .navbar-logo h1 {
   margin: 0;
   font-size: 24px;
+  color: #D4AF37;
 }
 
 a{
@@ -31,6 +37,7 @@ a{
   display: flex;
 }
 
+
 .navbar-menu li {
   margin: 0 15px;
 }
@@ -43,12 +50,13 @@ a{
 
 .navbar-menu a:hover {
   text-decoration: underline;
+  color: #D4AF37;
 }
 
 .navbar-buttons .btn-book-now {
   padding: 10px 20px;
   color: #fff;
-  background-color: gold;
+  background-color: #D4AF37;
   border: none;
   border-radius: 5px;
   text-decoration: none;

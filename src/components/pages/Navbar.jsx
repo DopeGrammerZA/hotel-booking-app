@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <h1><Link to='/'>Peaceful Hotel</Link></h1>
+        <h1><Link className='navbar-logo-text' to='/'>Peaceful Hotel</Link></h1>
       </div>
       <ul className="navbar-menu">
         <li><Link to='/'>Home</Link></li>

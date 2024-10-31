@@ -34,7 +34,7 @@
   }
   
   .footer-section ul li:hover, .footer-section ul li a:hover {
-    color: gold;
+    color: #D4AF37;
     transition: 0.3s;
     cursor: pointer;
   }
@@ -61,7 +61,7 @@
   }
   
   .social-icons a:hover {
-    color: gold;
+    color: #D4AF37;
   }
   
   .map-container {
@@ -99,5 +99,5 @@
   }
   
   .footer h3{
-    color: gold;
+    color: #D4AF37;
   }
