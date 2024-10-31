@@ -44,6 +44,7 @@ const RoomList = () => {
       {rooms.length > 0 ? (
         rooms.map((room) => (
           <div key={room.id} className="room-card">
+            <img src="https://i.pinimg.com/236x/5a/c5/32/5ac53236eb13837da97b5c494d413734.jpg" alt="" />
             <h3 className="room-name">{room.name}</h3>
             <p className="room-description">{room.description}</p>
             <p className="room-location">Location: {room.location}</p>

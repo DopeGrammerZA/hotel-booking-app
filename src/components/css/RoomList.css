@@ -1,16 +1,18 @@
-.room-list {
+  .room-list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px; 
   justify-content: center;
   padding: 20px;
-  margin-bottom: 60px;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 .room-list-title h2{
   display: flex;
   justify-content: center;
-  margin-top: 90px;
+  margin-top: 150px;
+  color: #D4AF37;
 }
 
 
@@ -24,7 +26,7 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-@media screen and (width: 600px) {
+@media screen and (min-width: 600px) {
   .room-card {
     background-color: #ffffff;
     border: 1px solid #ddd;
@@ -33,6 +35,7 @@
     overflow: hidden;
     width: 300px; 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1px;
   }
 }
 
@@ -55,12 +58,12 @@
 .room-card .price {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #e74c3c;
+  color: #D4AF37; 
   margin: 0 16px 16px;
 }
 
 .room-card button {
-  background-color: gold;
+  background-color: #D4AF37;
   border: none;
   border-radius: 4px;
   color: #fff;

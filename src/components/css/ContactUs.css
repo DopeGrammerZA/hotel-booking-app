@@ -113,3 +113,6 @@
     background-color: rgb(110, 97, 20); 
   }
   
+  .success-message{
+    color: green;
+  }

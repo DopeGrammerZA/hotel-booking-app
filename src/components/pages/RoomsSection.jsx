@@ -40,7 +40,7 @@ const RoomsSection = () => {
   
   return (
     <section className="rooms-section">
-      <h2>Our Rooms</h2>
+      <h2>Our featured Homes</h2>
       <div className="rooms-container">
         {rooms.map(room => (
           <div key={room.id} className="room-card"> 
