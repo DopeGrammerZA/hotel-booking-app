@@ -18,12 +18,17 @@
 
 .room-card {
   background-color: #ffffff;
-  border: 1px solid #ddd;
+  border: 100px solid #D4AF37;  
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   width: 300px; 
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 0.4rem;  
+  flex-wrap: wrap;
+  overflow: hidden;
+  
+  
 }
 
 @media screen and (min-width: 600px) {
@@ -35,7 +40,7 @@
     overflow: hidden;
     width: 300px; 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    font-size: 1px;
+    
   }
 }
 
@@ -44,24 +49,27 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.room-card h3 {
+.room-card h4 {
   font-size: 1.5rem;
   margin: 16px;
   color: #333;
 }
 
 .room-card p {
-  margin: 0 16px 16px;
-  color: #555;
+  margin: 0 16px 9px;
+  color: black;
+  line-height: 1.3;
 }
 
 .room-card .price {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #D4AF37; 
-  margin: 0 16px 16px;
+  background-color: #D4AF37;
+  color: white; 
+  padding: 10px;
+  border-radius: 20px;
 }
-
+  
 .room-card button {
   background-color: #D4AF37;
   border: none;
@@ -70,8 +78,10 @@
   cursor: pointer;
   font-size: 1rem;
   padding: 10px 20px;
-  margin: 0 16px 16px;
+  margin: 16px;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 91%;
+  
 }
 
 .room-card button:hover {
@@ -79,4 +89,24 @@
   transform: scale(1.05);
   opacity: 0.6;
   transition: 0.5s;
+}
+
+.room-card h4 {
+  color: black;
+}
+
+.room-card .image-container{
+  width: 100%;
+}
+
+.price-name-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.card-span{
+  color: #D4AF37;
 }
