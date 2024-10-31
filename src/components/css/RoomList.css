@@ -24,6 +24,18 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+@media screen and (width: 600px) {
+  .room-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+}
+
 .room-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);

@@ -13,7 +13,7 @@ const RoomList = () => {
   
 
   const { rooms, loading, error } = useSelector((state) => state.rooms);
-  console.log(rooms);
+  
 
   useEffect(() => {
     dispatch(fetchRooms());
@@ -57,7 +57,7 @@ const RoomList = () => {
         ))
       ) : (
         <p>No rooms available at the moment.</p>
-      )}
+      )}    
     </div>
     <Footer/>
     </div>

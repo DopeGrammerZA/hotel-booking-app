@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import '../css/Payment.css'
 
 const Payment = () => {
   const selectedRoom = useSelector((state) => state.rooms.selectedRoom);
@@ -79,6 +80,7 @@ const Payment = () => {
   return (
     <div>
       <Navbar/>
+      <div className='payment-container'></div>
       <div className="payment">
         <h2 className="payment-title">Payment for {selectedRoom.name}</h2>
         <div className="payment-details">

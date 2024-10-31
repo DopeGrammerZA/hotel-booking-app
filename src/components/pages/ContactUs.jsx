@@ -3,7 +3,7 @@ import '../css/ContactUs.css';
 import Navbar from './Navbar'; 
 import Footer from './Footer'; 
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
-import emailjs from 'emailjs-com'; 
+
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
