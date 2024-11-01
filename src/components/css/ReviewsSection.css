@@ -2,6 +2,11 @@
     padding: 3rem 2rem;
     background-color: #f9f9f9;
     text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   
   .reviews-section h2 {
@@ -18,7 +23,8 @@
   }
   
   .review-card {
-    background: #fff;
+    background: #d4af37;
+    color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     min-width: 300px;
@@ -48,13 +54,14 @@
   
   .review-rating {
     font-size: 1rem;
-    color: #ffcc00;
+    color: white;
     margin-bottom: 1rem;
   }
   
   .review-content p {
     font-size: 1rem;
-    color: #333;
+    color: #d4af37;
+    color: white;
   }
   
   @media (max-width: 768px) {
@@ -67,4 +74,60 @@
       max-width: 100%;
     }
   }
-  
+  .add-review-form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-self: center;
+    width: 40%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.add-review-form h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.add-review-form input,
+.add-review-form textarea,
+.add-review-form select {
+    width: 80%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.add-review-form textarea {
+    min-height: 100px; 
+    resize: vertical; 
+}
+
+.add-review-form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.add-review-form button {
+    background-color: #d4af37; 
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-review-form button:hover {
+    background-color: gold; 
+}
