@@ -21,14 +21,14 @@ const RoomDetail = () => {
           <div className='room-detail-container'>
           <div className="room-detail">
             <h2 className="room-title">{selectedRoom.name}</h2>
-            <div className="room-images">
-            <img className="large-image" src={selectedRoom.roomImage} alt={`Room ${selectedRoom.name} - Main`} />
+            <div className="room-image-container">
+              <img className="room-image" src={selectedRoom.roomImage} alt={`Room ${selectedRoom.name} - Main`} />
             </div >
             <div className='room-paragraphs'>
-                <p><strong>Description:</strong> {selectedRoom.description}</p>
-                <p><strong>Location:</strong> {selectedRoom.location}</p>
-                <p><strong>Rating:</strong> {selectedRoom.rating} ⭐</p>
-                <p><strong>Price per night:</strong> R{selectedRoom.pricePerNight}</p>
+                <p><strong><span>Description:</span></strong> {selectedRoom.description}</p>
+                <p><strong><span>Location:</span></strong> {selectedRoom.location}</p>
+                <p><strong><span>Ratings</span></strong> {selectedRoom.rating} ⭐</p>
+                <p><strong><span>Price per night</span></strong> R{selectedRoom.pricePerNight}</p>
                 <p><strong>Amenities:</strong> {Array.isArray(selectedRoom.amenities) ? selectedRoom.amenities.join(', ') : selectedRoom.amenities || 'No amenities listed'}</p>
 
             </div>
