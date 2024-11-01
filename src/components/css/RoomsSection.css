@@ -43,12 +43,12 @@
     
     .room-details h3 {
       font-size: 1.75rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
     
-    .room-price {
+    .room-details p {
       font-size: 1.5rem;
-      color: gold;
+      color: #d4af37;
       margin-bottom: 1rem;
     }
     
