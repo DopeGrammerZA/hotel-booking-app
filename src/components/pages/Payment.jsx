@@ -3,13 +3,13 @@ import { useSelector } from "react-redux";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "../css/Payment.css";
-import { db, addDoc, collection } from "../../firebase/config/firebase-config";
+import { useNavigate } from "react-router-dom";
+import { db, addDoc, collection, doc, updateDoc } from "../../firebase/config/firebase-config";
 
 const Payment = () => {
   const selectedRoom = useSelector((state) => state.rooms.selectedRoom);
   const user = useSelector((state) => state.auth.user);
-  console.log(selectedRoom)
- 
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!selectedRoom) {
@@ -30,10 +30,18 @@ const Payment = () => {
       bookingDate: new Date().toISOString(),
       amenities: selectedRoom.amenities,
     };
+
     try {
+      
       await addDoc(collection(db, "bookings"), bookingData);
       console.log("Booking data saved to Firebase:", bookingData);
-      selectedRoom.isAvailable = false; 
+
+     
+      const roomRef = doc(db, "accommodations", selectedRoom.id.toString());
+      await updateDoc(roomRef, { isAvailable: false });
+
+      
+      navigate("/confirmedBooking");
     } catch (error) {
       console.error("Error saving booking data to Firebase:", error);
     }
@@ -85,7 +93,6 @@ const Payment = () => {
               .capture()
               .then((details) => {
                 handlePaymentSuccess(details);
-                
               })
               .catch(handlePaymentError);
           },

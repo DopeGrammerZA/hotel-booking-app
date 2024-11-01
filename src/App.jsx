@@ -17,6 +17,7 @@ import Payment from './components/pages/Payment';
 import AboutPage from './components/pages/AboutPage';
 import ContactUs from './components/pages/ContactUs';
 import AuthRoute from './components/pages/Authroute';
+import ConfirmedBooking from './components/pages/ConfirmedBooking.jsx'
 
 
 
@@ -47,7 +48,7 @@ function App() {
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/payment" element={ <AuthRoute><Payment /></AuthRoute>} />
-          
+          <Route path="/confirmedBooking" element={<ConfirmedBooking />} />
         </Routes>
       </div>
     </Router>
