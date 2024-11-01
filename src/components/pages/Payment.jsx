@@ -3,9 +3,13 @@ import { useSelector } from "react-redux";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "../css/Payment.css";
+import { db, addDoc, collection } from "../../firebase/config/firebase-config";
 
 const Payment = () => {
   const selectedRoom = useSelector((state) => state.rooms.selectedRoom);
+  const user = useSelector((state) => state.auth.user);
+  console.log(selectedRoom)
+ 
 
   useEffect(() => {
     if (!selectedRoom) {
@@ -13,9 +17,26 @@ const Payment = () => {
     }
   }, [selectedRoom]);
 
-  const handlePaymentSuccess = (details) => {
+  const handlePaymentSuccess = async (details) => {
     console.log("Payment successful:", details);
     alert("Payment successful! Thank you for your booking.");
+
+    const bookingData = {
+      roomId: selectedRoom.id,
+      userId: user.uid,
+      userEmail: user.email,
+      roomName: selectedRoom.name,
+      price: selectedRoom.pricePerNight,
+      bookingDate: new Date().toISOString(),
+      amenities: selectedRoom.amenities,
+    };
+    try {
+      await addDoc(collection(db, "bookings"), bookingData);
+      console.log("Booking data saved to Firebase:", bookingData);
+      selectedRoom.isAvailable = false; 
+    } catch (error) {
+      console.error("Error saving booking data to Firebase:", error);
+    }
   };
 
   const handlePaymentError = (error) => {
@@ -64,6 +85,7 @@ const Payment = () => {
               .capture()
               .then((details) => {
                 handlePaymentSuccess(details);
+                
               })
               .catch(handlePaymentError);
           },
