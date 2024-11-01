@@ -1,59 +1,41 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../css/RoomsSection.css';
-import img1 from '../../assets/img/about-pic.jpg';
-import img2 from '../../assets/img/room1.jpg';
-import img3 from '../../assets/img/room2.jpg';
-
-
-
-const rooms = [
-  {
-    id: 1,
-    name: "Deluxe Suite",
-    price: "R 5000/night",
-    features: ["King-sized Bed", "Ocean View", "Private Balcony", "Luxury Bath"],
-    image: img1
-  },
-  {
-    id: 2,
-    name: "Executive Room",
-    price: "R 3000/night",
-    features: ["Queen-sized Bed", "City View", "Work Desk", "Mini Bar"],
-    image: img2
-  },
-  {
-    id: 3,
-    name: "Standard Room",
-    price: "R 2500/night",
-    features: ["Double Bed", "Garden View", "Free Wi-Fi", "Coffee Maker"],
-    image: img3
-  }
-];
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRooms } from "../../redux/roomsSlice";
+import { useNavigate } from "react-router-dom";
+import "../css/RoomsSection.css";
 
 const RoomsSection = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { rooms, loading, error } = useSelector((state) => state.rooms);
 
-  const handleBookNowClick = (roomId) => {
-    navigate(`/roomList`); 
+  useEffect(() => {
+    dispatch(fetchRooms());
+  }, [dispatch]);
+
+  const handleBookNowClick = (room) => {
+    navigate(`/roomList/`);
   };
-  
+
+  if (loading) return <p>Loading rooms...</p>;
+  if (error) return <p>Error fetching rooms: {error}</p>;
+
   return (
     <section className="rooms-section">
-      <h2>Our featured Homes</h2>
+      <h2>Our Featured Homes</h2>
       <div className="rooms-container">
-        {rooms.map(room => (
-          <div key={room.id} className="room-card"> 
-            <img src={room.image} alt={room.name} className="room-image" />
+        {rooms.slice(0, 3).map((room) => (
+          <div key={room.id} className="room-card">
+            <img src={room.roomImage} alt={room.name} className="room-image" />
             <div className="room-details">
               <h3>{room.name}</h3>
-              <p className="room-price">{room.price}</p>
+              <p className="room-price">R{room.pricePerNight}/Night</p>
               <ul className="room-features">
-                {room.features.map((feature, index) => (
-                  <li key={index}>{feature}</li>
-                ))}
+                {Array.isArray(room.amenities)
+                  ? room.amenities.map((amenity, index) => <li key={index}>{amenity}</li>)
+                  : room.amenities || "No amenities listed"}
               </ul>
-              <button className="btn-book-room" onClick={() => handleBookNowClick(room.id)}>
+              <button className="btn-book-room" onClick={() => handleBookNowClick(room)}>
                 Book Now
               </button>
             </div>

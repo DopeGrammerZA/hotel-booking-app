@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; 
 import '../css/HeroSection.css';
 import Navbar from './Navbar';
 import { selectAvailableAccommodations } from '../../redux/accommodationSlice';
@@ -9,16 +10,23 @@ const HeroSection = () => {
   const [checkOutDate, setCheckOutDate] = useState('');
   const [numRooms, setNumRooms] = useState('');
   const [numGuests, setNumGuests] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); 
 
   const availableAccommodations = useSelector(selectAvailableAccommodations);
   console.log(availableAccommodations); 
 
+  const navigate = useNavigate(); 
+
   const handleSearchClick = () => {
-    const filteredAccommodations = availableAccommodations.filter(acc => 
-      acc.numRooms >= numRooms && acc.numGuests >= numGuests
-    );
     
-    console.log('Filtered accommodations:', filteredAccommodations);
+    if (!checkInDate || !checkOutDate || !numRooms || !numGuests) {
+      setErrorMessage('Please fill in all fields'); 
+      return; 
+    }
+
+    
+    setErrorMessage('');
+    navigate('/roomlist');
   };
 
   return (
@@ -59,6 +67,7 @@ const HeroSection = () => {
           <button className="btn-book-now" onClick={handleSearchClick}>
             Check Availability
           </button>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </div>
       </div>
     </div>
