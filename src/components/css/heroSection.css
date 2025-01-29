@@ -69,12 +69,31 @@
   color: white;
 }
 
+
+@media (max-width: 425px) {
+  .hero-container{
+    width: 100vw;
+  }
+  .hero-content h1 {
+    font-size: 0.1rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .booking-form input, .btn-book-now {
+    width: 90%;
+    max-width: none;
+  }
+}
+
 @media (max-width: 768px) {
   .hero-container{
     width: 100vw;
   }
   .hero-content h1 {
-    font-size: 2.5rem;
+    /* font-size: 2.5rem; */
   }
 
   .hero-content p {

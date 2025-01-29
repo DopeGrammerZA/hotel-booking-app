@@ -25,7 +25,7 @@ import ConfirmedBooking from './components/pages/ConfirmedBooking.jsx'
 function App() {
   return (
     <Router>
-      <div>
+      <div className='App'>
         <Routes>
           <Route path="/" element={
             <>
