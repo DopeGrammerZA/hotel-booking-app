@@ -8,10 +8,10 @@ const Footer = () => {
           <h3>Quick Links</h3>
           <ul>
             <li><a href="#home">Home</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#rooms">Rooms</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/roomlist">Rooms</a></li>
             <li><a href="#offers">Special Offers</a></li>
-            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="/contact">Contact Us</a></li>
           </ul>
         </div>
         <div className="footer-section contact-info">

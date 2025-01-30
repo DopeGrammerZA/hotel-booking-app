@@ -22,7 +22,7 @@ const Payment = () => {
     alert("Payment successful! Thank you for your booking.");
 
     const bookingData = {
-      roomId: selectedRoom.id,
+      id: selectedRoom.id,
       userId: user.uid,
       userEmail: user.email,
       roomName: selectedRoom.name,
