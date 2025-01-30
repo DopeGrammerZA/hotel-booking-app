@@ -13,7 +13,7 @@ const HeroSection = () => {
   const [errorMessage, setErrorMessage] = useState(''); 
 
   const availableAccommodations = useSelector(selectAvailableAccommodations);
-  console.log(availableAccommodations); 
+ 
 
   const navigate = useNavigate(); 
 

@@ -17,8 +17,7 @@
 
 
 .room-card {
-  background-color: #ffffff;
-  border: 100px solid #D4AF37;  
+  background-color: #ffffff;  
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
