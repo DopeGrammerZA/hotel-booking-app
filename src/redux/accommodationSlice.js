@@ -7,8 +7,6 @@ export const selectAvailableAccommodations = createSelector(
   (accommodations) => accommodations.filter(acc => acc.isAvailable === true)
 );
   
-console.log(selectAvailableAccommodations)
-
 const initialState = {
   accommodations: [],
   status: 'idle',
