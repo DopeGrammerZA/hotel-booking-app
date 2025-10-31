@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'; 
-import '../css/HeroSection.css';
+import '../css/heroSection.css';
 import Navbar from './Navbar';
 import { selectAvailableAccommodations } from '../../redux/accommodationSlice';
 
