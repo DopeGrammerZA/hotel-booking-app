@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signOutUser } from '../../redux/authSlice';
-import '../css/adminDashboard.css';
+import '../css/AdminDashboard.css';
 
 const AdminDashboard = () => {
   const [activeMenu, setActiveMenu] = useState('dashboard');
