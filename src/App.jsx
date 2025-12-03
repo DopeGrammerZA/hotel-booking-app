@@ -1,19 +1,23 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HeroSection from './components/HeroSection';
-import AboutSection from './components/AboutSection';
-import RoomsSection from './components/RoomsSection';
-import Footer from './components/Footer';
-import RoomDetails from './components/RoomDetails';
-import AuthPage from './firebase/auth/AuthPage';
-import Dashboard from './components/Dashboard';
-import ForgotPasswordPage from './components/ForgotPassword';
-import ReviewPage from './components/ReviewsSection';
-import EditProfile from './components/EditProfile';
-import AccommodationList from './components/AccommodationList';
-import AdminDashboard from './components/AdminDashboard';
-import RoomList from './components/RoomList';
-import ConfirmRoom from './components/ConfirmRoom';
-import Payment from './components/Payment';
+import HeroSection from './components/pages/HeroSection';
+import AboutSection from './components/pages/AboutSection';
+import RoomsSection from './components/pages/RoomsSection';
+import Footer from './components/pages/Footer';
+import RoomDetails from './components/pages/RoomDetails';
+import AuthPage from './components/auth/AuthPage';
+import Dashboard from './components/pages/Dashboard';
+import ForgotPasswordPage from './components/pages/ForgotPassword';
+import ReviewPage from './components/pages/ReviewsSection';
+import EditProfile from './components/pages/EditProfile';
+import AccommodationList from './components/pages/AccommodationList';
+import AdminDashboard from './components/pages/AdminDashboard';
+import RoomList from './components/pages/RoomList';
+import ConfirmRoom from './components/pages/ConfirmRoom';
+import Payment from './components/pages/Payment';
+import AboutPage from './components/pages/AboutPage';
+import ContactUs from './components/pages/ContactUs';
+import AuthRoute from './components/pages/Authroute';
+import ConfirmedBooking from './components/pages/ConfirmedBooking.jsx'
 
 
 
@@ -21,7 +25,7 @@ import Payment from './components/Payment';
 function App() {
   return (
     <Router>
-      <div>
+      <div className='App'>
         <Routes>
           <Route path="/" element={
             <>
@@ -41,7 +45,10 @@ function App() {
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/roomlist" element={<RoomList />} />  
           <Route path="/confirm-room" element={<ConfirmRoom />} />
-          <Route path="/payment" element={<Payment />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/payment" element={ <AuthRoute><Payment /></AuthRoute>} />
+          <Route path="/confirmedBooking" element={<ConfirmedBooking />} />
         </Routes>
       </div>
     </Router>
