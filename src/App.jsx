@@ -1,53 +1,54 @@
+// src/App.jsx
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './styles/App.css'; // This should import Tailwind CSS
+
 import HeroSection from './components/pages/HeroSection';
 import AboutSection from './components/pages/AboutSection';
 import RoomsSection from './components/pages/RoomsSection';
+import ReviewsSection from './components/pages/ReviewsSection';
 import Footer from './components/pages/Footer';
 import RoomDetails from './components/pages/RoomDetails';
 import AuthPage from './components/auth/AuthPage';
 import Dashboard from './components/pages/Dashboard';
 import ForgotPasswordPage from './components/pages/ForgotPassword';
-import ReviewPage from './components/pages/ReviewsSection';
 import EditProfile from './components/pages/EditProfile';
 import AccommodationList from './components/pages/AccommodationList';
 import AdminDashboard from './components/pages/AdminDashboard';
 import RoomList from './components/pages/RoomList';
 import ConfirmRoom from './components/pages/ConfirmRoom';
-import Payment from './components/pages/Payment';
-import AboutPage from './components/pages/AboutPage';
 import ContactUs from './components/pages/ContactUs';
-import AuthRoute from './components/pages/Authroute';
-import ConfirmedBooking from './components/pages/ConfirmedBooking.jsx'
-
-
-
+import AboutPage from './components/pages/AboutPage';
+import Payment from './components/pages/Payment';
+import AuthRoute from './components/pages/AuthRoute';
+import ConfirmedBooking from './components/pages/ConfirmedBooking';
 
 function App() {
   return (
     <Router>
-      <div className='App'>
+      <div className="App">
         <Routes>
           <Route path="/" element={
             <>
               <HeroSection />
               <AboutSection />
               <RoomsSection />
-              <ReviewPage />
+              <ReviewsSection />
               <Footer />
             </>
           } />
           <Route path="/login" element={<AuthPage />} />
           <Route path="/accommodationList" element={<AccommodationList />} />
           <Route path="/AdminDashboard" element={<AdminDashboard />} />
-          <Route path="/dashboard" element={< Dashboard/>} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/room/:id" element={<RoomDetails />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/edit-profile" element={<EditProfile />} />
-          <Route path="/roomlist" element={<RoomList />} />  
+          <Route path="/roomlist" element={<RoomList />} />
           <Route path="/confirm-room" element={<ConfirmRoom />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/payment" element={ <AuthRoute><Payment /></AuthRoute>} />
+          <Route path="/payment" element={<AuthRoute><Payment /></AuthRoute>} />
           <Route path="/confirmedBooking" element={<ConfirmedBooking />} />
         </Routes>
       </div>
