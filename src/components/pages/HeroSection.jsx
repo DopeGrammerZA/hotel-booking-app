@@ -1,213 +1,250 @@
-// src/components/pages/HeroSection.jsx
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Calendar, Users, Search, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, Users, Star, ChevronRight } from 'lucide-react';
-import { selectAvailableAccommodations } from '../../redux/accommodationSlice';
+import toast from 'react-hot-toast';
 
 const HeroSection = () => {
-  const [checkInDate, setCheckInDate] = useState('');
-  const [checkOutDate, setCheckOutDate] = useState('');
-  const [numRooms, setNumRooms] = useState(1);
-  const [numGuests, setNumGuests] = useState(2);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const availableAccommodations = useSelector(selectAvailableAccommodations);
+  const [bookingData, setBookingData] = useState({
+    checkIn: '',
+    checkOut: '',
+    guests: '2',
+    roomType: 'all'
+  });
+  
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate();
 
-  const handleSearchClick = () => {
-    if (!checkInDate || !checkOutDate) {
-      setErrorMessage('Please select check-in and check-out dates');
+  const heroImages = [
+    'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    'https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleBooking = (e) => {
+    e.preventDefault();
+    if (!bookingData.checkIn || !bookingData.checkOut) {
+      toast.error('Please select check-in and check-out dates');
       return;
     }
-    setErrorMessage('');
-    navigate('/roomlist');
+    navigate('/rooms', { state: bookingData });
+    toast.success('Searching for available rooms...');
   };
 
-  const today = new Date().toISOString().split('T')[0];
+  const scrollToRooms = () => {
+    const roomsSection = document.getElementById('rooms-section');
+    if (roomsSection) {
+      roomsSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/rooms');
+    }
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)'
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-      </div>
+    <section className="relative h-screen min-h-[900px] flex items-center overflow-hidden">
+      {/* Background Images with Fade Animation */}
+      {heroImages.map((image, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/40 z-10"></div>
+          <img 
+            src={image}
+            alt={`Luxury Hotel ${index + 1}`}
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
+      ))}
 
       {/* Content */}
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center py-16 lg:py-24">
-            {/* Left Text Content */}
-            <div className="text-white">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-px bg-gold-500"></div>
-                <span className="text-gold-500 font-semibold tracking-[0.2em] text-sm uppercase">
-                  Ultimate Luxury
-                </span>
-              </div>
-              
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light leading-tight mb-6">
-                Experience
-                <span className="block font-semibold mt-2 text-gold-500">Peaceful Elegance</span>
-              </h1>
-              
-              <p className="text-lg md:text-xl font-light text-white/90 mb-10 max-w-xl">
-                Where timeless sophistication meets unparalleled comfort. 
-                Discover the art of luxury living at Peaceful Hotel.
-              </p>
+      <div className="container mx-auto container-padding relative z-20">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-3xl"
+        >
+          <motion.div variants={itemVariants} className="mb-12">
+            <div className="h-px w-20 bg-gold-500 mb-8"></div>
+            <h1 className="text-white font-display text-5xl md:text-6xl lg:text-display font-light leading-[0.9] mb-8">
+              Experience
+              <span className="block text-gold-500 mt-6">True Luxury</span>
+            </h1>
+            <p className="text-white/80 text-lg font-light leading-relaxed max-w-xl">
+              A sanctuary of elegance in the heart of the city, where every moment 
+              is crafted to perfection. Discover unparalleled luxury and impeccable 
+              service at Peaceful Hotel.
+            </p>
+          </motion.div>
 
-              {/* Features */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-                {['5★ Rating', '24/7 Concierge', '150+ Rooms', 'Spa & Wellness'].map((feature, index) => (
-                  <div key={index} className="text-center">
-                    <div className="text-2xl md:text-3xl font-serif text-gold-500 mb-1">
-                      {feature.split(' ')[0]}
+          {/* Booking Form */}
+          <motion.div variants={itemVariants}>
+            <div className="glass-effect rounded-sm p-1 max-w-4xl">
+              <form onSubmit={handleBooking} className="flex flex-col md:flex-row gap-1">
+                <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-1">
+                  {/* Check-in */}
+                  <div className="relative group">
+                    <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
+                      <Calendar className="w-5 h-5 text-gold-500 group-hover:text-white transition-colors" />
                     </div>
-                    <div className="text-xs md:text-sm uppercase tracking-wider text-white/80">
-                      {feature.split(' ').slice(1).join(' ')}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Booking Form */}
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-2xl max-w-lg mx-auto lg:mx-0">
-              <div className="mb-6">
-                <h3 className="font-serif text-2xl text-gray-900 mb-2">Plan Your Stay</h3>
-                <p className="text-gray-600">Experience luxury tailored to your preferences</p>
-              </div>
-
-              <div className="space-y-6">
-                {/* Date Inputs */}
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-2">
-                      Check In
+                    <input
+                      type="date"
+                      className="w-full bg-white/10 backdrop-blur-sm text-white placeholder-white/60 p-4 pl-12 border-r border-white/10 focus:outline-none focus:bg-white/20 transition-colors"
+                      value={bookingData.checkIn}
+                      onChange={(e) => setBookingData({...bookingData, checkIn: e.target.value})}
+                      required
+                    />
+                    <label className="absolute left-12 top-4 text-xs text-white/60 pointer-events-none">
+                      CHECK-IN
                     </label>
-                    <div className="relative">
-                      <Calendar className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                      <input
-                        type="date"
-                        min={today}
-                        value={checkInDate}
-                        onChange={(e) => setCheckInDate(e.target.value)}
-                        className="w-full pl-12 pr-4 py-3 bg-ivory-100 border border-gray-200 rounded-lg font-sans text-gray-900 placeholder-gray-500 focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20 transition-all"
-                      />
-                    </div>
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-2">
-                      Check Out
-                    </label>
-                    <div className="relative">
-                      <Calendar className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                      <input
-                        type="date"
-                        min={checkInDate || today}
-                        value={checkOutDate}
-                        onChange={(e) => setCheckOutDate(e.target.value)}
-                        className="w-full pl-12 pr-4 py-3 bg-ivory-100 border border-gray-200 rounded-lg font-sans text-gray-900 placeholder-gray-500 focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20 transition-all"
-                      />
+                  {/* Check-out */}
+                  <div className="relative group">
+                    <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
+                      <Calendar className="w-5 h-5 text-gold-500 group-hover:text-white transition-colors" />
                     </div>
+                    <input
+                      type="date"
+                      className="w-full bg-white/10 backdrop-blur-sm text-white placeholder-white/60 p-4 pl-12 border-r border-white/10 focus:outline-none focus:bg-white/20 transition-colors"
+                      value={bookingData.checkOut}
+                      onChange={(e) => setBookingData({...bookingData, checkOut: e.target.value})}
+                      required
+                    />
+                    <label className="absolute left-12 top-4 text-xs text-white/60 pointer-events-none">
+                      CHECK-OUT
+                    </label>
+                  </div>
+
+                  {/* Guests */}
+                  <div className="relative group">
+                    <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
+                      <Users className="w-5 h-5 text-gold-500 group-hover:text-white transition-colors" />
+                    </div>
+                    <select
+                      className="w-full bg-white/10 backdrop-blur-sm text-white p-4 pl-12 pr-8 border-r border-white/10 focus:outline-none focus:bg-white/20 transition-colors appearance-none cursor-pointer"
+                      value={bookingData.guests}
+                      onChange={(e) => setBookingData({...bookingData, guests: e.target.value})}
+                    >
+                      {[1,2,3,4].map(num => (
+                        <option key={num} value={num} className="bg-charcoal-900">
+                          {num} {num === 1 ? 'Guest' : 'Guests'}
+                        </option>
+                      ))}
+                    </select>
+                    <label className="absolute left-12 top-4 text-xs text-white/60 pointer-events-none">
+                      GUESTS
+                    </label>
+                  </div>
+
+                  {/* Room Type */}
+                  <div className="relative group">
+                    <select
+                      className="w-full bg-white/10 backdrop-blur-sm text-white p-4 pr-8 focus:outline-none focus:bg-white/20 transition-colors appearance-none cursor-pointer"
+                      value={bookingData.roomType}
+                      onChange={(e) => setBookingData({...bookingData, roomType: e.target.value})}
+                    >
+                      <option value="all" className="bg-charcoal-900">ALL ROOMS</option>
+                      <option value="suite" className="bg-charcoal-900">SUITES</option>
+                      <option value="deluxe" className="bg-charcoal-900">DELUXE</option>
+                    </select>
+                    <label className="absolute left-4 top-4 text-xs text-white/60 pointer-events-none">
+                      ROOM TYPE
+                    </label>
                   </div>
                 </div>
 
-                {/* Guests & Rooms */}
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-2">
-                      Guests
-                    </label>
-                    <div className="relative">
-                      <Users className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                      <select
-                        value={numGuests}
-                        onChange={(e) => setNumGuests(e.target.value)}
-                        className="w-full pl-12 pr-4 py-3 bg-ivory-100 border border-gray-200 rounded-lg font-sans text-gray-900 focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20 transition-all appearance-none"
-                      >
-                        {[1, 2, 3, 4, 5, 6].map(num => (
-                          <option key={num} value={num}>
-                            {num} {num === 1 ? 'Guest' : 'Guests'}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-2">
-                      Rooms
-                    </label>
-                    <div className="relative">
-                      <Star className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                      <select
-                        value={numRooms}
-                        onChange={(e) => setNumRooms(e.target.value)}
-                        className="w-full pl-12 pr-4 py-3 bg-ivory-100 border border-gray-200 rounded-lg font-sans text-gray-900 focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20 transition-all appearance-none"
-                      >
-                        {[1, 2, 3, 4].map(num => (
-                          <option key={num} value={num}>
-                            {num} {num === 1 ? 'Room' : 'Rooms'}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Error Message */}
-                {errorMessage && (
-                  <div className="text-red-600 text-sm bg-red-50 p-3 rounded-lg border border-red-100">
-                    {errorMessage}
-                  </div>
-                )}
-
-                {/* CTA Button */}
                 <button
-                  onClick={handleSearchClick}
-                  className="w-full px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-white font-semibold tracking-wider uppercase text-sm rounded-lg hover:from-gold-600 hover:to-gold-700 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 group"
+                  type="submit"
+                  className="bg-gold-500 text-white px-8 py-4 flex items-center justify-center space-x-2 hover:bg-gold-600 transition-colors group min-w-[200px]"
                 >
-                  Check Availability
-                  <ChevronRight className="group-hover:translate-x-1 transition-transform" size={20} />
+                  <Search className="w-5 h-5" />
+                  <span className="tracking-widest text-sm">CHECK AVAILABILITY</span>
                 </button>
+              </form>
+            </div>
+          </motion.div>
 
-                {/* Trust Badges */}
-                <div className="pt-4 border-t border-gray-100">
-                  <div className="flex items-center justify-center gap-6 text-sm text-gray-600">
-                    <span className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-gold-500 rounded-full"></div>
-                      Best Rate Guaranteed
-                    </span>
-                    <span className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-gold-500 rounded-full"></div>
-                      No Booking Fees
-                    </span>
-                  </div>
-                </div>
+          {/* Trust Indicators */}
+          <motion.div 
+            variants={itemVariants}
+            className="mt-12 flex flex-wrap gap-8"
+          >
+            {['Best Price Guarantee', 'Free Cancellation', '24/7 Luxury Service'].map((item) => (
+              <div key={item} className="flex items-center space-x-3">
+                <div className="w-2 h-2 rounded-full bg-gold-500"></div>
+                <span className="text-white/80 text-sm">{item}</span>
               </div>
-            </div>
-          </div>
-        </div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-          <div className="animate-bounce">
-            <div className="w-8 h-12 border-2 border-white/30 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-white/50 rounded-full mt-3"></div>
-            </div>
+      {/* Scroll Indicator */}
+      <motion.div
+        animate={{ y: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 2 }}
+        className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-30 cursor-pointer"
+        onClick={scrollToRooms}
+      >
+        <div className="text-center">
+          <div className="text-white/60 text-xxs tracking-widest mb-4">
+            EXPLORE OUR LUXURY
           </div>
+          <ChevronDown className="w-6 h-6 text-white/60 mx-auto" />
+        </div>
+      </motion.div>
+
+      {/* Image Counter */}
+      <div className="absolute bottom-12 right-12 z-30">
+        <div className="flex items-center space-x-2">
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImageIndex(index)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                index === currentImageIndex 
+                  ? 'bg-gold-500 w-4' 
+                  : 'bg-white/30 hover:bg-white/50'
+              }`}
+            />
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
